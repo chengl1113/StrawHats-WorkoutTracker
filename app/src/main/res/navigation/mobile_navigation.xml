@@ -7,15 +7,15 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.strawhats_workouttracker.ui.nutrition.NutritionFragment"
+        android:name="com.example.strawhats_workouttracker.ui.workout.WorkoutFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_nutrition" />
+        tools:layout="@layout/fragment_workout" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.example.strawhats_workouttracker.ui.workouts.WorkoutsFragment"
+        android:name="com.example.strawhats_workouttracker.ui.nutrition.NutritionFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_workouts" />
+        tools:layout="@layout/fragment_nutrition" />
 
     <fragment
         android:id="@+id/navigation_notifications"
