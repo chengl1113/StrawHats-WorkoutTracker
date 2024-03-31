@@ -1,13 +1,13 @@
-package com.example.strawhats_workouttracker.ui.Nutrition
+package com.example.strawhats_workouttracker.ui.graph
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class NutritionViewModel : ViewModel() {
+class GraphViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
+        value = "This is notifications Fragment"
     }
     val text: LiveData<String> = _text
 }
