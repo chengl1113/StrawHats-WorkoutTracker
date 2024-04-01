@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.strawhats_workouttracker.R
 import com.example.strawhats_workouttracker.databinding.FragmentNutritionListBinding
 
 private const val TAG = "NutritionListFragment"
@@ -35,7 +37,11 @@ class NutritionListFragment : Fragment() {
         binding.nutritionRecyclerView.layoutManager = LinearLayoutManager(context)
 
         val nutritions = nutritionViewModel.nutritions
-        val adapter = NutritionListAdapter(nutritions)
+        val adapter = NutritionListAdapter(nutritions){nutritionId ->
+            findNavController().navigate(
+                NutritionListFragmentDirections.showNutritionDetail(nutritionId)
+            )
+        }
         binding.nutritionRecyclerView.adapter = adapter
 
         return binding.root
