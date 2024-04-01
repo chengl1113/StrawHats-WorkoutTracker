@@ -13,13 +13,22 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.example.strawhats_workouttracker.ui.nutrition.NutritionFragment"
+        android:name="com.example.strawhats_workouttracker.ui.nutrition.NutritionListFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_nutrition" />
+        tools:layout="@layout/fragment_nutrition_list" >
+<!--        <action-->
+<!--            android:id="@+id/show_nutrition_detail"-->
+<!--            app:destination="@id/nutritionDetailFragment" />-->
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.example.strawhats_workouttracker.ui.graph.GraphFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_graph" />
+<!--    <fragment-->
+<!--        android:id="@+id/nutritionDetailFragment"-->
+<!--        android:name="com.example.strawhats_workouttracker.ui.nutrition.NutritionDetailFragment"-->
+<!--        android:label="NutritionDetailFragment"-->
+<!--        tools:layout="@layout/fragment_nutrition_detail" />-->
 </navigation>
