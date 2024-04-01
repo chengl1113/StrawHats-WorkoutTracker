@@ -13,4 +13,11 @@
     <string name="dinner">Dinner</string>
     <string name="snacks">Snacks</string>
     <string name="plus_sign">+</string>
+    <string name="exercise_label">Exercise</string>
+    <string name="set_1">Set # 1</string>
+    <string name="rpe_text">RPE (rate of perceived exertion)</string>
+    <string name="reps_label">Reps</string>
+    <string name="weight_label">Weight</string>
+    <string name="new_set">Start New Set</string>
+    <string name="new_exercise">Start New Exercise</string>
 </resources>
