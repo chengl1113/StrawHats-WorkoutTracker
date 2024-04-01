@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="set_1">
+        <![CDATA[<style name="set_1">         <item name="android:textSize">14sp</item>         <item name="android:letterSpacing">0.01</item>         <item name="android:textColor">#000000</item>     </style>]]></style>
+</resources>
