@@ -9,7 +9,11 @@
         android:id="@+id/navigation_home"
         android:name="com.example.strawhats_workouttracker.ui.workout.WorkoutFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_workout" />
+        tools:layout="@layout/fragment_workout" >
+        <action
+            android:id="@+id/show_workout_detail"
+            app:destination="@id/workoutDetailFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_dashboard"
@@ -35,4 +39,9 @@
             android:name="nutritionId"
             app:argType="java.util.UUID" />
     </fragment>
+    <fragment
+        android:id="@+id/workoutDetailFragment"
+        android:name="com.example.strawhats_workouttracker.ui.workout.WorkoutDetailFragment"
+        android:label="WorkoutDetailFragment"
+        tools:layout="@layout/fragment_workout_detail"/>
 </navigation>

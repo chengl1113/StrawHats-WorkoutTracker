@@ -10,13 +10,23 @@ import com.example.strawhats_workouttracker.Workout
 import com.example.strawhats_workouttracker.databinding.ListItemWorkoutBinding
 
 class WorkoutHolder(
-    val binding: ListItemWorkoutBinding
+    private val binding: ListItemWorkoutBinding
 ) : RecyclerView.ViewHolder(binding.root) {
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun bind(workout: Workout, onWorkoutClicked: () -> Unit) {
+        binding.workoutDateTextview.text = workout.date.toString()
+        var minutes = workout.duration.toMinutes()
+        val hours = minutes / 60
+        minutes -= (hours * 60)
+        binding.durationChip.text = String.format("%02d:%02d", hours, minutes)
 
+        binding.root.setOnClickListener { onWorkoutClicked()}
+    }
 }
 
 class WorkoutAdapter(
-    private val workouts: List<Workout>
+    private val workouts: List<Workout>,
+    private val onWorkoutClicked: () -> Unit
 ) : RecyclerView.Adapter<WorkoutHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WorkoutHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -26,17 +36,11 @@ class WorkoutAdapter(
 
     override fun getItemCount(): Int { return workouts.size }
 
-    @SuppressLint("SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.O)
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: WorkoutHolder, position: Int) {
         val workout = workouts[position]
-        holder.apply {
-            binding.workoutDateTextview.text = workout.date.toString()
-            var minutes = workout.duration.toMinutes()
-            val hours = minutes / 60
-            minutes -= (hours * 60)
-            binding.durationChip.text = String.format("%02d:%02d", hours, minutes)
-        }
+        holder.bind(workout, onWorkoutClicked)
     }
 
 }
