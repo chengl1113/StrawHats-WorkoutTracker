@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "666237470476",
+    "project_id": "cs501-final-project-716c0",
+    "storage_bucket": "cs501-final-project-716c0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:666237470476:android:f345cd1ec38732a5efeb29",
+        "android_client_info": {
+          "package_name": "com.example.strawhats_workouttracker"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAS8x8nFpQye-r-V0aFzxJtoeziisajeSw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
