@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.strawhats_workouttracker.Nutrition
 import com.example.strawhats_workouttracker.databinding.FragmentNutritionDetailBinding
@@ -49,6 +50,23 @@ class NutritionDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.breakfastAddButton.setOnClickListener {
+            navigateToSearchFragment()
+        }
+
+        binding.lunchAddButton.setOnClickListener {
+            navigateToSearchFragment()
+        }
+
+        binding.dinnerAddButton.setOnClickListener {
+            navigateToSearchFragment()
+        }
+
+        binding.snacksAddButton.setOnClickListener {
+            navigateToSearchFragment()
+        }
+
         binding.apply {
 
         }
@@ -57,6 +75,10 @@ class NutritionDetailFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun navigateToSearchFragment() {
+        findNavController().navigate(NutritionDetailFragmentDirections.actionNutritionDetailFragmentToNutritionSearchFragment())
     }
 
 

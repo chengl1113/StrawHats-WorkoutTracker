@@ -38,10 +38,20 @@
         <argument
             android:name="nutritionId"
             app:argType="java.util.UUID" />
+        <action
+            android:id="@+id/action_nutritionDetailFragment_to_nutritionSearchFragment"
+            app:destination="@id/nutritionSearchFragment" />
     </fragment>
     <fragment
         android:id="@+id/workoutDetailFragment"
         android:name="com.example.strawhats_workouttracker.ui.workout.WorkoutDetailFragment"
         android:label="WorkoutDetailFragment"
         tools:layout="@layout/fragment_workout_detail"/>
+    <fragment
+        android:id="@+id/nutritionSearchFragment"
+        android:name="com.example.strawhats_workouttracker.ui.nutrition.NutritionSearchFragment"
+        android:label="NutritionSearchFragment" />
+    <action
+        android:id="@+id/action_nutritionDetailFragment_to_nutritionSearchFragment"
+        app:destination="@id/nutritionSearchFragment" />
 </navigation>
