@@ -3,6 +3,9 @@ package com.example.strawhats_workouttracker.ui.workout
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
@@ -22,6 +25,11 @@ class WorkoutFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
@@ -46,8 +54,24 @@ class WorkoutFragment : Fragment() {
         return binding.root
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_main, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_account -> {
+                // Navigate to settings screen.
+                findNavController().navigate(R.id.workout_to_accountFragment)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null
+//        _binding = null
     }
 }
