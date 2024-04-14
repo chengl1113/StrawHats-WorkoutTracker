@@ -1,6 +1,8 @@
 package com.example.strawhats_workouttracker
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -18,6 +20,7 @@ private const val TAG = "LoginActivity"
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
+    private lateinit var sharedPreferences: SharedPreferences
     private lateinit var signupText: TextView
     private lateinit var loginButton: Button
     private lateinit var usernameEditText : EditText
@@ -25,9 +28,17 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var firebaseDatabase: FirebaseDatabase
     private lateinit var databaseReference: DatabaseReference
     override fun onCreate(savedInstanceState: Bundle?) {
+        // if the user has been logged in, go to main activity
+        sharedPreferences = getSharedPreferences("LoginInfo", Context.MODE_PRIVATE)
+        if (sharedPreferences.getBoolean("logged in?", false)) {
+            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+        }
+
+
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_login)
+
 
         firebaseDatabase = FirebaseDatabase.getInstance()
         databaseReference = firebaseDatabase.reference.child("users")
@@ -64,6 +75,12 @@ class LoginActivity : AppCompatActivity() {
 
                         if (userData != null && userData.password == password) {
                             Log.d(TAG, "Login Successful")
+                            // save username and the fact that the user is logged in
+                            val editor = sharedPreferences.edit()
+                            editor.putString("username", username)
+                            editor.putBoolean("logged in?", true)
+                            editor.apply()
+
                             startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                             finish()
                             return

@@ -18,6 +18,28 @@
         android:layout_height="match_parent">
 
         <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/timerTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_marginEnd="32dp"
+            android:gravity="center_vertical"
+            android:text="@string/_00_00_00"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@+id/rpe_slider"
+            app:layout_constraintBottom_toTopOf="@id/endWorkoutButton"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/newExerciseButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/new_exercise"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/newSetButton" />
+
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/setNumber2"
             android:layout_width="210dp"
             android:layout_height="35dp"
@@ -137,13 +159,14 @@
             app:layout_constraintTop_toBottomOf="@+id/rpe_slider"/>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/newExerciseButton"
+            android:id="@+id/endWorkoutButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="@string/new_exercise"
+            android:layout_marginStart="228dp"
+            android:text="@string/end_workout"
+            app:backgroundTint="@color/red"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/newSetButton"/>
+            app:layout_constraintTop_toBottomOf="@+id/newSetButton" />
 
         <com.google.android.material.divider.MaterialDivider
             android:id="@+id/workout_detail_divider"
@@ -151,7 +174,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/newExerciseButton" />
+            app:layout_constraintTop_toBottomOf="@+id/endWorkoutButton" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
     <ScrollView

@@ -3,6 +3,8 @@ package com.example.strawhats_workouttracker.ui.workout
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.SpannableStringBuilder
 import android.view.LayoutInflater
 import android.view.View
@@ -23,6 +25,25 @@ class WorkoutDetailFragment : Fragment(){
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+
+    // for the timer
+    private var running = false
+    private var seconds = 0
+
+    private val handler = Handler(Looper.getMainLooper())
+    private val runnable = object : Runnable {
+        override fun run() {
+            if (running) {
+                seconds++
+                val hours = seconds / 3600
+                val minutes = (seconds % 3600) / 60
+                val secs = seconds % 60
+                val timeString = String.format("%02d:%02d:%02d", hours, minutes, secs)
+                binding.timerTextView.text = timeString
+                handler.postDelayed(this, 1000)
+            }
+        }
+    }
 
     // to store the exercises being done
     private lateinit var exercises : MutableMap<String, View>
@@ -48,7 +69,19 @@ class WorkoutDetailFragment : Fragment(){
             addNewSet()
         }
 
+        binding.endWorkoutButton.setOnClickListener{
+            stopTimer()
+        }
+
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // start timer when the view is created
+        running = true
+        handler.post(runnable)
     }
 
     private fun addNewSet() {
@@ -106,6 +139,10 @@ class WorkoutDetailFragment : Fragment(){
 
     }
 
+    private fun stopTimer() {
+        running = false
+        handler.removeCallbacks(runnable)
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
