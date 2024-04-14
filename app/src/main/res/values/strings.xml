@@ -14,7 +14,7 @@
     <string name="snacks">Snacks</string>
     <string name="plus_sign">+</string>
     <string name="exercise_label">Exercise</string>
-    <string name="set_1">Set # 1</string>
+    <string name="set_1">Set # </string>
     <string name="rpe_text">RPE (rate of perceived exertion)</string>
     <string name="reps_label">Reps</string>
     <string name="weight_label">Weight</string>
@@ -32,4 +32,5 @@
     <string name="not_yet_registered_signup">Not yet registered? Signup</string>
     <string name="sign_up">Sign Up</string>
     <string name="already_registered_login">Already registered? Login</string>
+    <string name="_1">1</string>
 </resources>
