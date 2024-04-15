@@ -13,6 +13,9 @@
         <action
             android:id="@+id/show_workout_detail"
             app:destination="@id/workoutDetailFragment" />
+        <action
+            android:id="@+id/workout_to_accountFragment"
+            app:destination="@id/accountFragment" />
     </fragment>
 
     <fragment
@@ -23,13 +26,20 @@
         <action
             android:id="@+id/show_nutrition_detail"
             app:destination="@id/nutritionDetailFragment" />
+        <action
+            android:id="@+id/nutrition_list_to_accountFragment"
+            app:destination="@id/accountFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.example.strawhats_workouttracker.ui.graph.GraphFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_graph" />
+        tools:layout="@layout/fragment_graph" >
+        <action
+            android:id="@+id/graph_to_accountFragment"
+            app:destination="@id/accountFragment" />
+    </fragment>
     <fragment
         android:id="@+id/nutritionDetailFragment"
         android:name="com.example.strawhats_workouttracker.ui.nutrition.NutritionDetailFragment"
@@ -54,4 +64,9 @@
     <action
         android:id="@+id/action_nutritionDetailFragment_to_nutritionSearchFragment"
         app:destination="@id/nutritionSearchFragment" />
+    <fragment
+        android:id="@+id/accountFragment"
+        android:name="com.example.strawhats_workouttracker.AccountFragment"
+        android:label="fragment_account"
+        tools:layout="@layout/fragment_account" />
 </navigation>

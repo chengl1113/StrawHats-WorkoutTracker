@@ -14,7 +14,6 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.example.strawhats_workouttracker.R
 import com.example.strawhats_workouttracker.databinding.FragmentWorkoutDetailBinding
 
@@ -54,9 +53,6 @@ class WorkoutDetailFragment : Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val workoutViewModel =
-            ViewModelProvider(this).get(WorkoutViewModel::class.java)
-
         _binding = FragmentWorkoutDetailBinding.inflate(inflater, container, false)
 
         exercises = mutableMapOf<String, View>()
@@ -145,6 +141,6 @@ class WorkoutDetailFragment : Fragment(){
     }
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null
+//        _binding = null
     }
 }
