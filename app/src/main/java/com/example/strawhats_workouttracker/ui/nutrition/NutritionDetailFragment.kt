@@ -35,14 +35,14 @@ class NutritionDetailFragment : Fragment() {
             date = Date(),
             calories = 0
         )
-        Log.d(TAG, "The crime ID is: ${args.nutritionId}")
+        Log.d(TAG, "The nutrition ID is: ${args.nutritionId}")
     }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding =
             FragmentNutritionDetailBinding.inflate(layoutInflater, container, false)
         return binding.root

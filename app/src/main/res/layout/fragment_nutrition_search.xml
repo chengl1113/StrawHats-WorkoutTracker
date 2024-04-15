@@ -14,4 +14,10 @@
         android:layout_height="wrap_content"
         android:queryHint="Search..." />
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="177dp"
+        android:text="TextView" />
+
 </LinearLayout>
