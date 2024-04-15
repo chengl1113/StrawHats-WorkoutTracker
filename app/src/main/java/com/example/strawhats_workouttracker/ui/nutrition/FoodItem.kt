@@ -1,5 +1,6 @@
 package com.example.strawhats_workouttracker.ui.nutrition
 
+
 data class FoodItem(
     val name: String,
     val calories: Double,

@@ -35,6 +35,7 @@ class NutritionDetailFragment : Fragment() {
             date = Date(),
             calories = 0
         )
+
         Log.d(TAG, "The nutrition ID is: ${args.nutritionId}")
     }
 

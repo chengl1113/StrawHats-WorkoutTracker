@@ -4,6 +4,7 @@ import com.example.strawhats_workouttracker.api.NutritionApi
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+
 class NutritionRepository {
     private val nutritionApi: NutritionApi
 

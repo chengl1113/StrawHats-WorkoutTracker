@@ -11,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.strawhats_workouttracker.databinding.FragmentNutritionSearchBinding
 import kotlinx.coroutines.launch
 
+
 private const val TAG = "NutritionSearchFragment"
 class NutritionSearchFragment : Fragment() {
 
