@@ -1,11 +1,13 @@
 package com.example.strawhats_workouttracker.ui.workout
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.text.SpannableStringBuilder
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +18,11 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import com.example.strawhats_workouttracker.R
 import com.example.strawhats_workouttracker.databinding.FragmentWorkoutDetailBinding
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import java.time.LocalDate
 
+private const val TAG = "WorkoutDetailFragment"
 class WorkoutDetailFragment : Fragment(){
 
     private var _binding: FragmentWorkoutDetailBinding? = null
@@ -47,6 +53,17 @@ class WorkoutDetailFragment : Fragment(){
     // to store the exercises being done
     private lateinit var exercises : MutableMap<String, View>
 
+    // store workout object to add to database
+    private lateinit var workout: Workout
+
+    // references to database
+    private lateinit var firebaseDatabase: FirebaseDatabase
+    private lateinit var databaseReference: DatabaseReference
+
+    // use shared prefs to get userId
+    private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var userId : String
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,7 +72,13 @@ class WorkoutDetailFragment : Fragment(){
     ): View {
         _binding = FragmentWorkoutDetailBinding.inflate(inflater, container, false)
 
+        sharedPreferences = requireActivity().getSharedPreferences("LoginInfo", Context.MODE_PRIVATE)
+        userId = sharedPreferences.getString("userId", "").toString()
+
+
         exercises = mutableMapOf<String, View>()
+
+        // updating views and stuff
 
         binding.newExerciseButton.setOnClickListener{
            addNewExercise()
@@ -67,7 +90,18 @@ class WorkoutDetailFragment : Fragment(){
 
         binding.endWorkoutButton.setOnClickListener{
             stopTimer()
+            workout.duration = seconds
+            Log.d(TAG, "workout: $workout")
+            // add to database
+            saveWorkoutToDatabase(workout)
         }
+
+        // create workout object
+        workout = Workout(date = LocalDate.now(), duration = 0, exercises = mutableListOf())
+
+        // do database stuff
+        firebaseDatabase = FirebaseDatabase.getInstance()
+        databaseReference = firebaseDatabase.reference.child("users").child(userId).child("workouts")
 
         return binding.root
     }
@@ -112,6 +146,9 @@ class WorkoutDetailFragment : Fragment(){
         val imm = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(requireView().windowToken, 0)
 
+        // add to workout object
+        workout.exercises.find{ exercise -> exercise.name == exerciseName }?.sets?.plusAssign(Set(weight.toInt(), reps.toInt(), rpe.toFloat()))
+
     }
 
     private fun updateSetCounter() {
@@ -133,11 +170,19 @@ class WorkoutDetailFragment : Fragment(){
         //reset set number text
         binding.setNumber.text = "1"
 
+        // add exercise to workout object
+        workout.exercises += Exercise(exerciseName, sets = mutableListOf())
+
     }
 
     private fun stopTimer() {
         running = false
         handler.removeCallbacks(runnable)
+    }
+
+    private fun saveWorkoutToDatabase(workout: Workout) {
+        val newWorkout = databaseReference.push()
+        newWorkout.setValue(workout)
     }
     override fun onDestroyView() {
         super.onDestroyView()

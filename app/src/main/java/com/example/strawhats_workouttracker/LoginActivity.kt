@@ -31,6 +31,7 @@ class LoginActivity : AppCompatActivity() {
         // if the user has been logged in, go to main activity
         sharedPreferences = getSharedPreferences("LoginInfo", Context.MODE_PRIVATE)
         if (sharedPreferences.getBoolean("logged in?", false)) {
+            Log.d(TAG, "userID: ${sharedPreferences.getString("userId", "no userId found")}")
             startActivity(Intent(this@LoginActivity, MainActivity::class.java))
         }
 
@@ -79,6 +80,7 @@ class LoginActivity : AppCompatActivity() {
                             val editor = sharedPreferences.edit()
                             editor.putString("username", username)
                             editor.putBoolean("logged in?", true)
+                            getUserId(username)
                             editor.apply()
 
                             startActivity(Intent(this@LoginActivity, MainActivity::class.java))
@@ -92,6 +94,28 @@ class LoginActivity : AppCompatActivity() {
 
             override fun onCancelled(error: DatabaseError) {
                 Log.d(TAG, "Database error: ${error.message}")
+            }
+        })
+    }
+
+    private fun getUserId(username: String) {
+        databaseReference.orderByChild("username").equalTo(username).addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    // Iterate over the dataSnapshot to get the user ID
+                    for (userSnapshot in dataSnapshot.children) {
+                        val userId = userSnapshot.key // This will give you the user ID
+                        val editor = sharedPreferences.edit()
+                        editor.putString("userId", userId)
+                        editor.apply()
+                    }
+                } else {
+                    println("No user found with the specified username.")
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                println("Database error: ${databaseError.message}")
             }
         })
     }

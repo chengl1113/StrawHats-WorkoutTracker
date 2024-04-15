@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
-import com.example.strawhats_workouttracker.Workout
 import com.example.strawhats_workouttracker.databinding.ListItemWorkoutBinding
 
 class WorkoutHolder(
@@ -15,7 +14,7 @@ class WorkoutHolder(
     @RequiresApi(Build.VERSION_CODES.O)
     fun bind(workout: Workout, onWorkoutClicked: () -> Unit) {
         binding.workoutDateTextview.text = workout.date.toString()
-        var minutes = workout.duration.toMinutes()
+        var minutes = workout.duration
         val hours = minutes / 60
         minutes -= (hours * 60)
         binding.durationChip.text = String.format("%02d:%02d", hours, minutes)
