@@ -16,6 +16,9 @@
         <action
             android:id="@+id/workout_to_accountFragment"
             app:destination="@id/accountFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_workoutSummaryFragment2"
+            app:destination="@id/workoutSummaryFragment2" />
     </fragment>
 
     <fragment
@@ -60,7 +63,8 @@
     <fragment
         android:id="@+id/nutritionSearchFragment"
         android:name="com.example.strawhats_workouttracker.ui.nutrition.NutritionSearchFragment"
-        android:label="NutritionSearchFragment" />
+        android:label="NutritionSearchFragment"
+        tools:layout="@layout/fragment_nutrition_search"/>
     <action
         android:id="@+id/action_nutritionDetailFragment_to_nutritionSearchFragment"
         app:destination="@id/nutritionSearchFragment" />
@@ -69,4 +73,12 @@
         android:name="com.example.strawhats_workouttracker.AccountFragment"
         android:label="fragment_account"
         tools:layout="@layout/fragment_account" />
+    <fragment
+        android:id="@+id/workoutSummaryFragment2"
+        android:name="com.example.strawhats_workouttracker.ui.workout.WorkoutSummaryFragment"
+        android:label="WorkoutSummaryFragment">
+        <argument
+            android:name="workout"
+            app:argType="com.example.strawhats_workouttracker.ui.workout.Workout"/>
+    </fragment>
 </navigation>

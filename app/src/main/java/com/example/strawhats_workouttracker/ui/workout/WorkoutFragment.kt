@@ -64,8 +64,9 @@ class WorkoutFragment : Fragment() {
         workoutViewModel.userId = userId
         workoutViewModel.workouts.observe(viewLifecycleOwner) {workouts ->
             Log.d(TAG, "workouts: $workouts")
-            val adapter = WorkoutAdapter(workouts) {
-                findNavController().navigate(R.id.show_workout_detail)
+            val adapter = WorkoutAdapter(workouts) { workout ->
+                val action = WorkoutFragmentDirections.actionNavigationHomeToWorkoutSummaryFragment2(workout)
+                findNavController().navigate(action)
             }
             binding.workoutRecyclerView.adapter = adapter
         }
