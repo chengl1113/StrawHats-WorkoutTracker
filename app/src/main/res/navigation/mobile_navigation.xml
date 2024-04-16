@@ -48,12 +48,14 @@
         android:name="com.example.strawhats_workouttracker.ui.nutrition.NutritionDetailFragment"
         android:label="NutritionDetailFragment"
         tools:layout="@layout/fragment_nutrition_detail" >
-        <argument
-            android:name="nutritionId"
-            app:argType="java.util.UUID" />
+<!--        <argument-->
+<!--            android:name="nutritionId"-->
+<!--            app:argType="java.util.UUID" />-->
         <action
             android:id="@+id/action_nutritionDetailFragment_to_nutritionSearchFragment"
             app:destination="@id/nutritionSearchFragment" />
+        <argument android:name="nutritionId"
+            app:argType="java.util.UUID"/>
     </fragment>
     <fragment
         android:id="@+id/workoutDetailFragment"
@@ -64,7 +66,18 @@
         android:id="@+id/nutritionSearchFragment"
         android:name="com.example.strawhats_workouttracker.ui.nutrition.NutritionSearchFragment"
         android:label="NutritionSearchFragment"
-        tools:layout="@layout/fragment_nutrition_search"/>
+        tools:layout="@layout/fragment_nutrition_search" >
+        <action
+            android:id="@+id/action_nutritionSearchFragment_to_nutritionFactsFragment"
+            app:destination="@id/nutritionFactsFragment">
+
+        </action>
+
+    </fragment>
+        <action
+            android:id="@+id/action_nutritionSearchFragment_to_nutritionDetailFragment"
+            app:destination="@id/nutritionDetailFragment"/>
+
     <action
         android:id="@+id/action_nutritionDetailFragment_to_nutritionSearchFragment"
         app:destination="@id/nutritionSearchFragment" />
@@ -81,4 +94,14 @@
             android:name="workout"
             app:argType="com.example.strawhats_workouttracker.ui.workout.Workout"/>
     </fragment>
+    <fragment
+        android:id="@+id/nutritionFactsFragment"
+        android:name="com.example.strawhats_workouttracker.ui.nutrition.NutritionFactsFragment"
+        android:label="NutritionFactsFragment" >
+        <argument
+            android:name="selectedFoodItem"
+            app:argType="com.example.strawhats_workouttracker.ui.nutrition.FoodItem" />
+    </fragment>
+
+
 </navigation>

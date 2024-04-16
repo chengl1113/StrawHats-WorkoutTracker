@@ -1,5 +1,7 @@
 package com.example.strawhats_workouttracker.ui.nutrition
 
+import java.io.Serializable
+
 
 data class FoodItem(
     val name: String,
@@ -14,4 +16,4 @@ data class FoodItem(
     val carbohhydrates_total_g: Double,
     val fiber_g: Double,
     val sugar_g: Double
-)
+): Serializable

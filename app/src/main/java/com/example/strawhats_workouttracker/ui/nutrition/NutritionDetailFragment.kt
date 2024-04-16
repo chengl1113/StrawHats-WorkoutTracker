@@ -25,7 +25,7 @@ class NutritionDetailFragment : Fragment() {
             "Cannot access binding because it is null. Is the view visible?"
         }
 
-    private val args: NutritionDetailFragmentArgs by navArgs()
+//    private val args: NutritionDetailFragmentArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +36,7 @@ class NutritionDetailFragment : Fragment() {
             calories = 0
         )
 
-        Log.d(TAG, "The nutrition ID is: ${args.nutritionId}")
+//        Log.d(TAG, "The nutrition ID is: ${args.nutritionId}")
     }
 
     override fun onCreateView(
