@@ -5,38 +5,31 @@ import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import java.time.LocalDate
-import kotlin.random.Random
 
+private const val TAG = "WorkoutViewModel"
 @RequiresApi(Build.VERSION_CODES.O)
-class WorkoutViewModel : ViewModel() {
+class WorkoutViewModel() : ViewModel() {
 
-    var workouts = mutableListOf<Workout>()
+    var userId = "-NvBHWxO-OSvtZEFgnbN"
+
+    private val _workouts = MutableLiveData<List<Workout>>()
+    val workouts: LiveData<List<Workout>> = _workouts
+
+    private val workoutRepository = WorkoutRepository(userId)
 
     init {
-        for (i in 0 until 20) {
-            val workout = Workout(
-                date = LocalDate.now(),
-                duration = Random.nextInt(60),
-                exercises = mutableListOf(
-                    Exercise("Bench press", mutableListOf(
-                        Set(315, 5, 8f),
-                        Set(250, 4, 7f),
-                        Set(225, 6, 9f)
-                    )),
-                    Exercise("Chest fly", mutableListOf(
-                        Set(117, 7, 8f),
-                        Set(150, 5, 9f),
-                        Set(150, 6, 10f)
-                    )),
-                    Exercise("Dips", mutableListOf(
-                        Set(190, 11, 8f),
-                        Set(200, 8, 7f),
-                        Set(200, 6, 9f)
-                    ))
-                )
-            )
-            workouts += workout
+        fetchWorkouts()
+    }
+
+    fun addWorkout(workout: Workout) {
+        val updatedList = _workouts.value?.toMutableList() ?: mutableListOf()
+        updatedList.add(workout)
+        _workouts.value = updatedList
+    }
+
+    private fun fetchWorkouts() {
+        workoutRepository.getWorkouts { fetchedWorkouts ->
+            _workouts.postValue(fetchedWorkouts)
         }
     }
 

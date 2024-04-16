@@ -16,6 +16,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import com.example.strawhats_workouttracker.R
 import com.example.strawhats_workouttracker.databinding.FragmentWorkoutDetailBinding
 import com.google.firebase.database.DatabaseReference
@@ -64,6 +65,9 @@ class WorkoutDetailFragment : Fragment(){
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var userId : String
 
+    // viewmodel reference
+    private val workoutViewModel: WorkoutViewModel by activityViewModels()
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -74,8 +78,6 @@ class WorkoutDetailFragment : Fragment(){
 
         sharedPreferences = requireActivity().getSharedPreferences("LoginInfo", Context.MODE_PRIVATE)
         userId = sharedPreferences.getString("userId", "").toString()
-
-
         exercises = mutableMapOf<String, View>()
 
         // updating views and stuff
@@ -180,9 +182,11 @@ class WorkoutDetailFragment : Fragment(){
         handler.removeCallbacks(runnable)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun saveWorkoutToDatabase(workout: Workout) {
         val newWorkout = databaseReference.push()
         newWorkout.setValue(workout)
+        workoutViewModel.addWorkout(workout)
     }
     override fun onDestroyView() {
         super.onDestroyView()
