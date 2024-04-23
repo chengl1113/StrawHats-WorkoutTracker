@@ -14,10 +14,12 @@ class WorkoutHolder(
     @RequiresApi(Build.VERSION_CODES.O)
     fun bind(workout: Workout, onWorkoutClicked: (Workout) -> Unit) {
         binding.workoutDateTextview.text = workout.date.toString()
-        var minutes = workout.duration
-        val hours = minutes / 60
-        minutes -= (hours * 60)
-        binding.durationChip.text = String.format("%02d:%02d", hours, minutes)
+        var seconds = workout.duration
+        val hours = seconds / 3600
+        seconds %= 3600
+        val minutes = seconds / 60
+        seconds %= 60
+        binding.durationChip.text = String.format("%02d:%02d:%02d", hours, minutes, seconds)
 
         binding.root.setOnClickListener { onWorkoutClicked(workout)}
     }

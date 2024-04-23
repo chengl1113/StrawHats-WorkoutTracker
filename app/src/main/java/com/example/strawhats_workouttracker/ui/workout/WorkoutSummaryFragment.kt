@@ -33,6 +33,15 @@ class WorkoutSummaryFragment : Fragment() {
         // set date text
         binding.dateTextview.text = "Date completed: ${workout.date}"
 
+        // set duration text
+        var seconds = workout.duration
+        val hours = seconds / 3600
+        seconds %= 3600
+        val minutes = seconds / 60
+        seconds %= 60
+
+        binding.durationTextview.text = "Duration: " + String.format("%02d:%02d:%02d", hours, minutes, seconds)
+
         // create exercise item view
         for (exercise in workout.exercises) {
             val newExercise = layoutInflater.inflate(R.layout.list_item_exercise, null)
