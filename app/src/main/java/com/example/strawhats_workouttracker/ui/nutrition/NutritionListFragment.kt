@@ -14,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.strawhats_workouttracker.R
 import com.example.strawhats_workouttracker.databinding.FragmentNutritionListBinding
+import java.util.Date
 import java.util.UUID
 
 private const val TAG = "NutritionListFragment"
@@ -43,16 +44,16 @@ class NutritionListFragment : Fragment() {
         binding.nutritionRecyclerView.layoutManager = LinearLayoutManager(context)
 
         val nutritions = nutritionViewModel.nutritions
-        val adapter = NutritionListAdapter(nutritions){nutritionId ->
+        val adapter = NutritionListAdapter(nutritions){nutritionDate ->
             findNavController().navigate(
-                NutritionListFragmentDirections.showNutritionDetail(nutritionId)
+                NutritionListFragmentDirections.showNutritionDetail(nutritionDate)
             )
         }
         binding.nutritionRecyclerView.adapter = adapter
 
-        val newNutritionId = UUID.randomUUID()
+        val newNutritionDate = Date()
         binding.newDayButton.setOnClickListener {
-            findNavController().navigate(NutritionListFragmentDirections.showNutritionDetail(newNutritionId))
+            findNavController().navigate(NutritionListFragmentDirections.showNutritionDetail(newNutritionDate))
         }
 
         return binding.root

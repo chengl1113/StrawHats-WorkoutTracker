@@ -1,21 +1,18 @@
 package com.example.strawhats_workouttracker.ui.nutrition
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.example.strawhats_workouttracker.Nutrition
 import com.example.strawhats_workouttracker.databinding.FragmentNutritionDetailBinding
-import java.util.Date
-import java.util.UUID
 
 private const val TAG = "NutritionDetailFragment"
 
 class NutritionDetailFragment : Fragment() {
+    private val args: NutritionDetailFragmentArgs by navArgs()
 
     private lateinit var nutrition: Nutrition
 
@@ -29,12 +26,7 @@ class NutritionDetailFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        nutrition = Nutrition(
-            id = UUID.randomUUID(),
-            title = "",
-            date = Date(),
-            calories = 0
-        )
+        val nutritionDate = args.nutritionDate
 
 //        Log.d(TAG, "The nutrition ID is: ${args.nutritionId}")
     }

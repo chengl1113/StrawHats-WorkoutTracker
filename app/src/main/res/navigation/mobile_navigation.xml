@@ -43,25 +43,25 @@
             android:id="@+id/graph_to_accountFragment"
             app:destination="@id/accountFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/nutritionDetailFragment"
         android:name="com.example.strawhats_workouttracker.ui.nutrition.NutritionDetailFragment"
         android:label="NutritionDetailFragment"
         tools:layout="@layout/fragment_nutrition_detail" >
-<!--        <argument-->
-<!--            android:name="nutritionId"-->
-<!--            app:argType="java.util.UUID" />-->
         <action
             android:id="@+id/action_nutritionDetailFragment_to_nutritionSearchFragment"
             app:destination="@id/nutritionSearchFragment" />
-        <argument android:name="nutritionId"
-            app:argType="java.util.UUID"/>
+        <argument android:name="nutritionDate"
+            app:argType="java.util.Date"/>
     </fragment>
+
     <fragment
         android:id="@+id/workoutDetailFragment"
         android:name="com.example.strawhats_workouttracker.ui.workout.WorkoutDetailFragment"
         android:label="WorkoutDetailFragment"
         tools:layout="@layout/fragment_workout_detail"/>
+
     <fragment
         android:id="@+id/nutritionSearchFragment"
         android:name="com.example.strawhats_workouttracker.ui.nutrition.NutritionSearchFragment"
@@ -70,22 +70,15 @@
         <action
             android:id="@+id/action_nutritionSearchFragment_to_nutritionFactsFragment"
             app:destination="@id/nutritionFactsFragment">
-
         </action>
-
     </fragment>
-        <action
-            android:id="@+id/action_nutritionSearchFragment_to_nutritionDetailFragment"
-            app:destination="@id/nutritionDetailFragment"/>
 
-    <action
-        android:id="@+id/action_nutritionDetailFragment_to_nutritionSearchFragment"
-        app:destination="@id/nutritionSearchFragment" />
     <fragment
         android:id="@+id/accountFragment"
         android:name="com.example.strawhats_workouttracker.AccountFragment"
         android:label="fragment_account"
         tools:layout="@layout/fragment_account" />
+
     <fragment
         android:id="@+id/workoutSummaryFragment2"
         android:name="com.example.strawhats_workouttracker.ui.workout.WorkoutSummaryFragment"
@@ -94,13 +87,18 @@
             android:name="workout"
             app:argType="com.example.strawhats_workouttracker.ui.workout.Workout"/>
     </fragment>
+
     <fragment
         android:id="@+id/nutritionFactsFragment"
         android:name="com.example.strawhats_workouttracker.ui.nutrition.NutritionFactsFragment"
-        android:label="NutritionFactsFragment" >
+        android:label="NutritionFactsFragment"
+        android:layout="@layout/fragment_nutrition_facts">
         <argument
-            android:name="selectedFoodItem"
+            android:name="foodItem"
             app:argType="com.example.strawhats_workouttracker.ui.nutrition.FoodItem" />
+        <action
+            android:id="@+id/action_nutrition_facts_to_nutrition_detail"
+            app:destination="@id/nutritionDetailFragment" />
     </fragment>
 
 

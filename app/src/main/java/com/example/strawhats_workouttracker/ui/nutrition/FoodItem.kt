@@ -13,7 +13,16 @@ data class FoodItem(
 //    val sodium_mg: Int,
 //    val potassium_mg: Int,
 //    val cholesterol_mg: Int,
-    val carbohhydrates_total_g: Double,
+    val carbohydrates_total_g: Double,
 //    val fiber_g: Double,
 //    val sugar_g: Double
-): Serializable
+): Serializable {
+    override fun toString(): String {
+        return "Name: $name\n" +
+                "Calories: $calories\n" +
+                "Serving: $serving_size_g\n" +
+                "Fat: $fat_total_g\n" +
+                "Protein: $protein_g\n" +
+                "Carbohydrates: $carbohydrates_total_g\n"
+    }
+}

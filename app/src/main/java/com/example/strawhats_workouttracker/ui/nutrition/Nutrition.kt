@@ -1,4 +1,4 @@
-package com.example.strawhats_workouttracker
+package com.example.strawhats_workouttracker.ui.nutrition
 
 import java.util.Date
 import java.util.UUID
