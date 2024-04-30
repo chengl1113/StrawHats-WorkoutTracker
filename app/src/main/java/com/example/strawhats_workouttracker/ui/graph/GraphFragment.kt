@@ -66,7 +66,10 @@ class GraphFragment : Fragment() {
         workoutViewModel.workouts.observe(viewLifecycleOwner) {workouts ->
             Log.d(TAG, "workouts: $workouts")
             val uniqueExercises = getUniqueExercises(workouts)
-            val adapter = GraphAdapter(uniqueExercises)
+            val adapter = GraphAdapter(uniqueExercises) { exerciseName ->
+                val action = GraphFragmentDirections.actionNavigationNotificationsToGraphDetailFragment(exerciseName, userId)
+                findNavController().navigate(action)
+            }
             binding.graphRecylerView.adapter = adapter
         }
 

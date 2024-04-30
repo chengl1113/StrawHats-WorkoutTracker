@@ -42,6 +42,9 @@
         <action
             android:id="@+id/graph_to_accountFragment"
             app:destination="@id/accountFragment" />
+        <action
+            android:id="@+id/action_navigation_notifications_to_graphDetailFragment"
+            app:destination="@id/graphDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/nutritionDetailFragment"
@@ -89,7 +92,8 @@
     <fragment
         android:id="@+id/workoutSummaryFragment2"
         android:name="com.example.strawhats_workouttracker.ui.workout.WorkoutSummaryFragment"
-        android:label="WorkoutSummaryFragment">
+        android:label="WorkoutSummaryFragment"
+        tools:layout="@layout/fragment_workout_summary">
         <argument
             android:name="workout"
             app:argType="com.example.strawhats_workouttracker.ui.workout.Workout"/>
@@ -101,6 +105,18 @@
         <argument
             android:name="selectedFoodItem"
             app:argType="com.example.strawhats_workouttracker.ui.nutrition.FoodItem" />
+    </fragment>
+    <fragment
+        android:id="@+id/graphDetailFragment"
+        android:name="com.example.strawhats_workouttracker.ui.graph.GraphDetailFragment"
+        android:label="GraphDetailFragment"
+        tools:layout="@layout/fragment_graph_detail">
+        <argument
+            android:name="exercise_name"
+            app:argType="string" />
+        <argument
+            android:name="userId"
+            app:argType="string" />
     </fragment>
 
 

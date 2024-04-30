@@ -9,13 +9,15 @@ import com.example.strawhats_workouttracker.ui.workout.Exercise
 class GraphHolder(
     private val binding: ListItemExerciseBinding
 ) : RecyclerView.ViewHolder(binding.root) {
-    fun bind(exercise: Exercise) {
+    fun bind(exercise: Exercise, onItemClicked: (exerciseName : String) -> Unit) {
         binding.exerciseTitle.text = exercise.name
+        binding.root.setOnClickListener{onItemClicked(exercise.name)}
     }
 }
 
 class GraphAdapter(
-    private val exercises: List<Exercise>
+    private val exercises: List<Exercise>,
+    private val onItemClicked: (exerciseName: String) -> Unit
 ) : RecyclerView.Adapter<GraphHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GraphHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -28,7 +30,8 @@ class GraphAdapter(
 
     override fun onBindViewHolder(holder: GraphHolder, position: Int) {
         val exercise = exercises[position]
-        holder.bind(exercise)
+        val exerciseName = exercise.name
+        holder.bind(exercise) { onItemClicked(exerciseName) }
     }
 
 }
