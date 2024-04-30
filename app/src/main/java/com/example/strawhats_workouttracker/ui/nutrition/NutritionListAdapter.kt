@@ -2,29 +2,28 @@ package com.example.strawhats_workouttracker.ui.nutrition
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.example.strawhats_workouttracker.Nutrition
 import com.example.strawhats_workouttracker.databinding.ListItemNutritionBinding
+import java.util.Date
 import java.util.UUID
 
 class NutritionHolder(
     private val binding: ListItemNutritionBinding
 ) : RecyclerView.ViewHolder(binding.root) {
-    fun bind(nutrition: Nutrition, onNutritionClicked: (nutritionId: UUID) -> Unit) {
+    fun bind(nutrition: Nutrition, onNutritionClicked: (nutritionDate: Date) -> Unit) {
         binding.nutritionTitle.text = nutrition.title
         binding.nutritionDate.text = nutrition.date.toString()
         binding.nutritionCalories.text = "Calories: ${nutrition.calories}"
 
         binding.root.setOnClickListener {
-            onNutritionClicked(nutrition.id)
+            onNutritionClicked(nutrition.date)
         }
     }
 }
 
 class NutritionListAdapter(
     private val nutritions: List<Nutrition>,
-    private val onNutritionClicked: (nutritionId: UUID) -> Unit
+    private val onNutritionClicked: (nutritionDate: Date) -> Unit
 ) : RecyclerView.Adapter<NutritionHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,

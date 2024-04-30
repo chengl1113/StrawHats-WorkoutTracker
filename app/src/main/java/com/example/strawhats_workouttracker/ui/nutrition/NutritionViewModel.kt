@@ -1,9 +1,6 @@
 package com.example.strawhats_workouttracker.ui.nutrition
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.strawhats_workouttracker.Nutrition
 import java.util.Date
 import java.util.UUID
 

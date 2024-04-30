@@ -4,46 +4,88 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/text_food_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Food Name" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="225dp"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/text_food_calories"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Food Calories" />
+        <TextView
+            android:id="@+id/text_food_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Food Name"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <TextView
-        android:id="@+id/text_food_serving_size_g"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Food Serving Size(grams)" />
+        <TextView
+            android:id="@+id/text_food_calories"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Food Calories"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <TextView
-        android:id="@+id/text_food_fat_total_g"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Food Total Fat(grams)" />
+        <TextView
+            android:id="@+id/text_food_serving_size_g"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Food Serving Size(grams)"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <TextView
-        android:id="@+id/text_food_protein_g"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Food Protein(grams)" />
+        <TextView
+            android:id="@+id/text_food_fat_total_g"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Food Total Fat(grams)"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <TextView
-        android:id="@+id/text_carbohydrates_total_g"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Food Carbohydrates(grams)" />
+        <TextView
+            android:id="@+id/text_food_protein_g"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Food Protein(grams)"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/text_carbohydrates_total_g"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Food Carbohydrates(grams)"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/editWeight"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:hint="@string/edit_measurement" />
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="49dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/add_nutrition_button"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:text="@string/add" />
+
+    </LinearLayout>
+
+
 
 </LinearLayout>
+

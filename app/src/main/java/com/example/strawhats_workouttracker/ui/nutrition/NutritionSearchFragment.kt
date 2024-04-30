@@ -9,9 +9,11 @@ import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.strawhats_workouttracker.databinding.FragmentNutritionSearchBinding
 import kotlinx.coroutines.launch
+import java.util.Date
 import kotlin.math.log
 
 
@@ -21,6 +23,7 @@ class NutritionSearchFragment : Fragment() {
     private var _binding: FragmentNutritionSearchBinding? = null
     private val binding get() = _binding!!
     private val nutritionRepository = NutritionRepository()
+    private val args: NutritionSearchFragmentArgs by navArgs()
     private var foodItems = listOf<FoodItem>()
 
     override fun onCreateView(
@@ -35,10 +38,12 @@ class NutritionSearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val nutritionDate = args.nutritionDate
+
         binding.searchNutrition.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 // Perform search when query submitted
-                query?.let { searchFood(it) }
+                query?.let { searchFood(it, nutritionDate) }
                 Log.d(TAG, "foodItems: $foodItems")
                 return true
             }
@@ -50,7 +55,7 @@ class NutritionSearchFragment : Fragment() {
         })
     }
 
-    private fun searchFood(query: String) {
+    private fun searchFood(query: String, nutritionDate: Date) {
         viewLifecycleOwner.lifecycleScope.launch {
             try {
                 val response = nutritionRepository.searchFood(
@@ -59,7 +64,7 @@ class NutritionSearchFragment : Fragment() {
                 )
                 val selectedFoodItem = response.firstOrNull()
                 selectedFoodItem?.let {
-                    val action = NutritionSearchFragmentDirections.actionNutritionSearchFragmentToNutritionFactsFragment(selectedFoodItem)
+                    val action = NutritionSearchFragmentDirections.actionNutritionSearchFragmentToNutritionFactsFragment(selectedFoodItem, nutritionDate)
                     findNavController().navigate(action)
                 }
                 Log.d(TAG, "Response received: $response")
