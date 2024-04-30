@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.strawhats_workouttracker.databinding.FragmentNutritionDetailBinding
+import java.util.Date
 
 private const val TAG = "NutritionDetailFragment"
 
@@ -44,20 +45,22 @@ class NutritionDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val nutritionDate = args.nutritionDate
+
         binding.breakfastAddButton.setOnClickListener {
-            navigateToSearchFragment()
+            navigateToSearchFragment(nutritionDate)
         }
 
         binding.lunchAddButton.setOnClickListener {
-            navigateToSearchFragment()
+            navigateToSearchFragment(nutritionDate)
         }
 
         binding.dinnerAddButton.setOnClickListener {
-            navigateToSearchFragment()
+            navigateToSearchFragment(nutritionDate)
         }
 
         binding.snacksAddButton.setOnClickListener {
-            navigateToSearchFragment()
+            navigateToSearchFragment(nutritionDate)
         }
 
         binding.apply {
@@ -70,8 +73,8 @@ class NutritionDetailFragment : Fragment() {
 //        _binding = null
     }
 
-    private fun navigateToSearchFragment() {
-        findNavController().navigate(NutritionDetailFragmentDirections.actionNutritionDetailFragmentToNutritionSearchFragment())
+    private fun navigateToSearchFragment(nutritionDate: Date) {
+        findNavController().navigate(NutritionDetailFragmentDirections.actionNutritionDetailFragmentToNutritionSearchFragment(nutritionDate))
     }
 
 

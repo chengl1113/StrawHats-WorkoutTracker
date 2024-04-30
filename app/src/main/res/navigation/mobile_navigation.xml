@@ -69,8 +69,9 @@
         tools:layout="@layout/fragment_nutrition_search" >
         <action
             android:id="@+id/action_nutritionSearchFragment_to_nutritionFactsFragment"
-            app:destination="@id/nutritionFactsFragment">
-        </action>
+            app:destination="@id/nutritionFactsFragment" />
+        <argument android:name="nutritionDate"
+            app:argType="java.util.Date"/>
     </fragment>
 
     <fragment
@@ -96,6 +97,8 @@
         <argument
             android:name="foodItem"
             app:argType="com.example.strawhats_workouttracker.ui.nutrition.FoodItem" />
+        <argument android:name="nutritionDate"
+            app:argType="java.util.Date"/>
         <action
             android:id="@+id/action_nutrition_facts_to_nutrition_detail"
             app:destination="@id/nutritionDetailFragment" />

@@ -40,6 +40,7 @@ class NutritionFactsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val foodItem = args.foodItem
+        val nutritionDate = args.nutritionDate
 
         // Populate the layout with information from the FoodItem object
         populateUIWithFoodItem(foodItem)
