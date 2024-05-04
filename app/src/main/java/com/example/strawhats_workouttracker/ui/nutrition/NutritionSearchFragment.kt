@@ -13,6 +13,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.strawhats_workouttracker.databinding.FragmentNutritionSearchBinding
 import kotlinx.coroutines.launch
+import java.time.LocalDate
 import java.util.Date
 import kotlin.math.log
 
@@ -38,12 +39,13 @@ class NutritionSearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val nutritionDate = args.nutritionDate
+        val nutrition = args.nutrition
+        val mealType = args.mealType
 
         binding.searchNutrition.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 // Perform search when query submitted
-                query?.let { searchFood(it, nutritionDate) }
+                query?.let { searchFood(it, nutrition, mealType) }
                 Log.d(TAG, "foodItems: $foodItems")
                 return true
             }
@@ -55,7 +57,7 @@ class NutritionSearchFragment : Fragment() {
         })
     }
 
-    private fun searchFood(query: String, nutritionDate: Date) {
+    private fun searchFood(query: String, nutrition: Nutrition, mealType: String) {
         viewLifecycleOwner.lifecycleScope.launch {
             try {
                 val response = nutritionRepository.searchFood(
@@ -64,7 +66,7 @@ class NutritionSearchFragment : Fragment() {
                 )
                 val selectedFoodItem = response.firstOrNull()
                 selectedFoodItem?.let {
-                    val action = NutritionSearchFragmentDirections.actionNutritionSearchFragmentToNutritionFactsFragment(selectedFoodItem, nutritionDate)
+                    val action = NutritionSearchFragmentDirections.actionNutritionSearchFragmentToNutritionFactsFragment(selectedFoodItem, nutrition, mealType)
                     findNavController().navigate(action)
                 }
                 Log.d(TAG, "Response received: $response")

@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.strawhats_workouttracker.databinding.FragmentNutritionDetailBinding
+import java.time.LocalDate
 import java.util.Date
 
 private const val TAG = "NutritionDetailFragment"
@@ -27,7 +28,7 @@ class NutritionDetailFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val nutritionDate = args.nutritionDate
+        val nutrition = args.nutrition
 
 //        Log.d(TAG, "The nutrition ID is: ${args.nutritionId}")
     }
@@ -45,22 +46,24 @@ class NutritionDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val nutritionDate = args.nutritionDate
+        val nutrition = args.nutrition
+        binding.nutritionCaloriesTextView.text = "${nutrition.calories} calories"
+        val nutritionDate = args.nutrition.date
 
         binding.breakfastAddButton.setOnClickListener {
-            navigateToSearchFragment(nutritionDate)
+            navigateToSearchFragment(nutrition, "breakfast")
         }
 
         binding.lunchAddButton.setOnClickListener {
-            navigateToSearchFragment(nutritionDate)
+            navigateToSearchFragment(nutrition, "lunch")
         }
 
         binding.dinnerAddButton.setOnClickListener {
-            navigateToSearchFragment(nutritionDate)
+            navigateToSearchFragment(nutrition, "dinner")
         }
 
         binding.snacksAddButton.setOnClickListener {
-            navigateToSearchFragment(nutritionDate)
+            navigateToSearchFragment(nutrition, "snacks")
         }
 
         binding.apply {
@@ -73,8 +76,8 @@ class NutritionDetailFragment : Fragment() {
 //        _binding = null
     }
 
-    private fun navigateToSearchFragment(nutritionDate: Date) {
-        findNavController().navigate(NutritionDetailFragmentDirections.actionNutritionDetailFragmentToNutritionSearchFragment(nutritionDate))
+    private fun navigateToSearchFragment(nutrition: Nutrition, mealType: String) {
+        findNavController().navigate(NutritionDetailFragmentDirections.actionNutritionDetailFragmentToNutritionSearchFragment(nutrition, mealType))
     }
 
 

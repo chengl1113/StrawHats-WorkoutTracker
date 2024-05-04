@@ -4,26 +4,26 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.strawhats_workouttracker.databinding.ListItemNutritionBinding
+import java.time.LocalDate
 import java.util.Date
 import java.util.UUID
 
 class NutritionHolder(
     private val binding: ListItemNutritionBinding
 ) : RecyclerView.ViewHolder(binding.root) {
-    fun bind(nutrition: Nutrition, onNutritionClicked: (nutritionDate: Date) -> Unit) {
-        binding.nutritionTitle.text = nutrition.title
+    fun bind(nutrition: Nutrition, onNutritionClicked: (Nutrition) -> Unit) {
         binding.nutritionDate.text = nutrition.date.toString()
         binding.nutritionCalories.text = "Calories: ${nutrition.calories}"
 
         binding.root.setOnClickListener {
-            onNutritionClicked(nutrition.date)
+            onNutritionClicked(nutrition)
         }
     }
 }
 
 class NutritionListAdapter(
     private val nutritions: List<Nutrition>,
-    private val onNutritionClicked: (nutritionDate: Date) -> Unit
+    private val onNutritionClicked: (Nutrition) -> Unit
 ) : RecyclerView.Adapter<NutritionHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -35,7 +35,7 @@ class NutritionListAdapter(
     }
     override fun onBindViewHolder(holder: NutritionHolder, position: Int) {
         val nutrition = nutritions[position]
-        holder.bind(nutrition, onNutritionClicked)
+        holder.bind(nutrition) {onNutritionClicked(nutrition)}
 
     }
     override fun getItemCount() = nutritions.size

@@ -1,20 +1,30 @@
 package com.example.strawhats_workouttracker.ui.nutrition
 
 import android.R
+import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.strawhats_workouttracker.databinding.FragmentNutritionFactsBinding
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import java.text.DecimalFormat
+import java.time.LocalDate
+
+private const val TAG = "NutritionFactsFragment"
 
 class NutritionFactsFragment : Fragment() {
 
@@ -27,6 +37,8 @@ class NutritionFactsFragment : Fragment() {
 
     private var selectedUnit: String = "grams"
 
+    private val viewModel: NutritionViewModel by viewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -36,11 +48,11 @@ class NutritionFactsFragment : Fragment() {
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val foodItem = args.foodItem
-        val nutritionDate = args.nutritionDate
 
         // Populate the layout with information from the FoodItem object
         populateUIWithFoodItem(foodItem)
@@ -66,19 +78,42 @@ class NutritionFactsFragment : Fragment() {
 
 
         binding.editWeight.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                // Not used
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                // Not used
-            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { }
 
             override fun afterTextChanged(s: Editable?) {
                 // Calculate nutrition based on the entered quantity and selected unit
                 calculateNutrition(foodItem)
             }
         })
+
+        binding.addFoodButton.setOnClickListener {
+            val nutrition = args.nutrition
+            when (args.mealType) {
+                "breakfast" -> {
+                    nutrition.breakfast += FoodItem(foodItem.name, 0.0, 0.0, 0.0, 0.0, 0.0)
+                    // Update other breakfast related fields similarly
+                }
+
+                "lunch" -> {
+                    nutrition.lunch += FoodItem(foodItem.name, 0.0, 0.0, 0.0, 0.0, 0.0)
+                    // Update other lunch related fields similarly
+                }
+
+                "dinner" -> {
+                    nutrition.dinner += FoodItem(foodItem.name, 0.0, 0.0, 0.0, 0.0, 0.0)
+                    // Update other dinner related fields similarly
+                }
+
+                "snacks" -> {
+                    nutrition.snacks += FoodItem(foodItem.name, 0.0, 0.0, 0.0, 0.0, 0.0)
+                    // Update other snacks related fields similarly
+                }
+//            val newNutrition = createNutrition()
+//            viewModel.addNutrition(newNutrition)
+            }
+            viewModel.updateNutrition(nutrition)
+        }
     }
 
     private fun calculateNutrition(foodItem: FoodItem) {
