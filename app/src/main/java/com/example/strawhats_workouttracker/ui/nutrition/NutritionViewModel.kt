@@ -35,6 +35,7 @@ class NutritionViewModel : ViewModel() {
         fetchNutritions()
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun addNutrition(nutrition: Nutrition) {
         // First, update the LiveData to update the UI immediately.
         val updatedList = _nutritions.value?.toMutableList() ?: mutableListOf()

@@ -80,6 +80,12 @@ class NutritionListFragment : Fragment() {
         nutritionViewModel.userId = userId
         nutritionViewModel.nutritions.observe(viewLifecycleOwner) {nutritions ->
             Log.d(TAG, "nutritions: $nutritions")
+            val todayDate = LocalDate.now()
+            val existsToday = nutritions.any { it.date == todayDate }
+
+            // Hide the 'New Day' button if an entry for today already exists
+            binding.newDayButton.visibility = if (existsToday) View.GONE else View.VISIBLE
+
             val adapter = NutritionListAdapter(nutritions) { nutrition ->
                 val action = NutritionListFragmentDirections.showNutritionDetail(nutrition)
                 findNavController().navigate(action)

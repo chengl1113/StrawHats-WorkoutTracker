@@ -91,22 +91,22 @@ class NutritionFactsFragment : Fragment() {
             val nutrition = args.nutrition
             when (args.mealType) {
                 "breakfast" -> {
-                    nutrition.breakfast += FoodItem(foodItem.name, 0.0, 0.0, 0.0, 0.0, 0.0)
+                    nutrition.breakfast += FoodItem(foodItem.name, foodItem.calories, foodItem.serving_size_g, foodItem.fat_total_g, foodItem.protein_g, foodItem.carbohydrates_total_g)
                     // Update other breakfast related fields similarly
                 }
 
                 "lunch" -> {
-                    nutrition.lunch += FoodItem(foodItem.name, 0.0, 0.0, 0.0, 0.0, 0.0)
+                    nutrition.lunch += FoodItem(foodItem.name, foodItem.calories, foodItem.serving_size_g, foodItem.fat_total_g, foodItem.protein_g, foodItem.carbohydrates_total_g)
                     // Update other lunch related fields similarly
                 }
 
                 "dinner" -> {
-                    nutrition.dinner += FoodItem(foodItem.name, 0.0, 0.0, 0.0, 0.0, 0.0)
+                    nutrition.dinner += FoodItem(foodItem.name, foodItem.calories, foodItem.serving_size_g, foodItem.fat_total_g, foodItem.protein_g, foodItem.carbohydrates_total_g)
                     // Update other dinner related fields similarly
                 }
 
                 "snacks" -> {
-                    nutrition.snacks += FoodItem(foodItem.name, 0.0, 0.0, 0.0, 0.0, 0.0)
+                    nutrition.snacks += FoodItem(foodItem.name, foodItem.calories, foodItem.serving_size_g, foodItem.fat_total_g, foodItem.protein_g, foodItem.carbohydrates_total_g)
                     // Update other snacks related fields similarly
                 }
 //            val newNutrition = createNutrition()
@@ -117,13 +117,13 @@ class NutritionFactsFragment : Fragment() {
     }
 
     private fun calculateNutrition(foodItem: FoodItem) {
-        val quantity = binding.editWeight.text.toString().toFloatOrNull() ?: return
+        foodItem.serving_size_g = binding.editWeight.text.toString().toDoubleOrNull() ?: return
 
         // Convert quantity to grams if necessary
         val quantityInGrams = when (selectedUnit) {
-            "ounces" -> quantity * 28.3495f
-            "pounds" -> quantity * 453.592f
-            else -> quantity
+            "ounces" -> foodItem.serving_size_g * 28.3495f
+            "pounds" -> foodItem.serving_size_g * 453.592f
+            else -> foodItem.serving_size_g
         }
 
         // Calculate nutrition based on quantity and unit
@@ -133,16 +133,21 @@ class NutritionFactsFragment : Fragment() {
         updateUIWithNutritionInfo(nutritionInfo)
     }
 
-    private fun calculateNutritionInfo(foodItem: FoodItem, quantityInGrams: Float): FoodItem {
+    private fun calculateNutritionInfo(foodItem: FoodItem, quantityInGrams: Double): FoodItem {
         val adjustedFoodItem = FoodItem(
             foodItem.name,
             foodItem.calories * (quantityInGrams / foodItem.serving_size_g),
-//            foodItem.serving_size_g,
             binding.editWeight.text.toString().toDouble(),
             foodItem.fat_total_g * (quantityInGrams / foodItem.serving_size_g),
             foodItem.protein_g * (quantityInGrams / foodItem.serving_size_g),
             foodItem.carbohydrates_total_g * (quantityInGrams / foodItem.serving_size_g)
         )
+
+        foodItem.calories = foodItem.calories * (quantityInGrams / foodItem.serving_size_g)
+        foodItem.serving_size_g = quantityInGrams
+        foodItem.fat_total_g = foodItem.fat_total_g * (quantityInGrams / foodItem.serving_size_g)
+        foodItem.protein_g = foodItem.protein_g * (quantityInGrams / foodItem.serving_size_g)
+        foodItem.carbohydrates_total_g = foodItem.carbohydrates_total_g * (quantityInGrams / foodItem.serving_size_g)
 
         return adjustedFoodItem
     }

@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.strawhats_workouttracker.databinding.FragmentNutritionDetailBinding
 import java.time.LocalDate
 import java.util.Date
@@ -50,6 +52,11 @@ class NutritionDetailFragment : Fragment() {
         binding.nutritionCaloriesTextView.text = "${nutrition.calories} calories"
         val nutritionDate = args.nutrition.date
 
+        setupRecyclerView(binding.breakfastRecyclerView, nutrition.breakfast)
+        setupRecyclerView(binding.lunchRecyclerView, nutrition.lunch)
+        setupRecyclerView(binding.dinnerRecyclerView, nutrition.dinner)
+        setupRecyclerView(binding.snacksRecyclerView, nutrition.snacks)
+
         binding.breakfastAddButton.setOnClickListener {
             navigateToSearchFragment(nutrition, "breakfast")
         }
@@ -69,6 +76,11 @@ class NutritionDetailFragment : Fragment() {
         binding.apply {
 
         }
+    }
+
+    private fun setupRecyclerView(recyclerView: RecyclerView, foodItems: List<FoodItem>) {
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.adapter = FoodItemAdapter(foodItems)
     }
 
     override fun onDestroyView() {

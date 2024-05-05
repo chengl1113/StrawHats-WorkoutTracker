@@ -4,9 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.strawhats_workouttracker.databinding.ListItemNutritionBinding
-import java.time.LocalDate
-import java.util.Date
-import java.util.UUID
 
 class NutritionHolder(
     private val binding: ListItemNutritionBinding

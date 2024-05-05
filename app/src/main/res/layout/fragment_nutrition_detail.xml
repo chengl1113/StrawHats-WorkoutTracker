@@ -70,6 +70,18 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/breakfastRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
         <TextView
             android:layout_width="120dp"
             android:layout_height="50dp"
@@ -81,6 +93,18 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:text="@string/plus_sign" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/lunchRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -106,6 +130,18 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/dinnerRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
         <TextView
             android:layout_width="120dp"
             android:layout_height="50dp"
@@ -117,6 +153,18 @@
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:text="@string/plus_sign" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/snacksRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
     </LinearLayout>
 
 </LinearLayout>
