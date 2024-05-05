@@ -10,7 +10,7 @@ class NutritionHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(nutrition: Nutrition, onNutritionClicked: (Nutrition) -> Unit) {
         binding.nutritionDate.text = nutrition.date.toString()
-        binding.nutritionCalories.text = "Calories: ${nutrition.calories}"
+        binding.nutritionCalories.text = String.format("Total Calories: %.0f", nutrition.calories)
 
         binding.root.setOnClickListener {
             onNutritionClicked(nutrition)

@@ -7,7 +7,7 @@ import java.util.UUID
 
 data class Nutrition(
     val date: LocalDate,
-    val calories: Double,
+    var calories: Double,
     val breakfast: MutableList<FoodItem>,
     val lunch: MutableList<FoodItem>,
     val dinner: MutableList<FoodItem>,

@@ -5,24 +5,8 @@ import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.strawhats_workouttracker.ui.workout.Workout
-import com.example.strawhats_workouttracker.ui.workout.WorkoutRepository
-import java.util.Date
-import java.util.UUID
 
 class NutritionViewModel : ViewModel() {
-//    val nutritions = mutableListOf<Nutrition>()
-//    init {
-//        for (i in 0 until 100) {
-//            val nutrition = Nutrition(
-//                id = UUID.randomUUID(),
-//                title ="Nutrition #$i",
-//                date = Date(),
-//                calories = 0
-//            )
-//            nutritions += nutrition
-//        }
-//    }
     var userId = "-NvBHWxO-OSvtZEFgnbN"
 
 
@@ -42,8 +26,6 @@ class NutritionViewModel : ViewModel() {
         updatedList.add(nutrition)
         _nutritions.value = updatedList
 
-        // Then, add the nutrition data to Firebase to store it persistently.
-        nutritionRepository.addNutrition(nutrition)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

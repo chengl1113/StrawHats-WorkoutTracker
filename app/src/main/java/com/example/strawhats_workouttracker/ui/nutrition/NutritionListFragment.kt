@@ -94,15 +94,6 @@ class NutritionListFragment : Fragment() {
         }
     }
 
-//        val nutritions = nutritionViewModel.nutritions
-//        val adapter = NutritionListAdapter(nutritions){nutritionDate ->
-//            findNavController().navigate(
-//                NutritionListFragmentDirections.showNutritionDetail(nutritionDate)
-//            )
-//        }
-//        binding.nutritionRecyclerView.adapter = adapter
-
-
     override fun onDestroyView() {
         super.onDestroyView()
 //        _binding = null

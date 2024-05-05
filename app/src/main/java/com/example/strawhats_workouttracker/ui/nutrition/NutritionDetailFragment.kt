@@ -10,15 +10,11 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.strawhats_workouttracker.databinding.FragmentNutritionDetailBinding
-import java.time.LocalDate
-import java.util.Date
 
 private const val TAG = "NutritionDetailFragment"
 
 class NutritionDetailFragment : Fragment() {
     private val args: NutritionDetailFragmentArgs by navArgs()
-
-    private lateinit var nutrition: Nutrition
 
     private var _binding: FragmentNutritionDetailBinding? = null
     private val binding
@@ -26,13 +22,9 @@ class NutritionDetailFragment : Fragment() {
             "Cannot access binding because it is null. Is the view visible?"
         }
 
-//    private val args: NutritionDetailFragmentArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val nutrition = args.nutrition
-
-//        Log.d(TAG, "The nutrition ID is: ${args.nutritionId}")
     }
 
     override fun onCreateView(
@@ -49,8 +41,7 @@ class NutritionDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val nutrition = args.nutrition
-        binding.nutritionCaloriesTextView.text = "${nutrition.calories} calories"
-        val nutritionDate = args.nutrition.date
+        binding.nutritionCaloriesTextView.text = String.format("%.0f calories", nutrition.calories)
 
         setupRecyclerView(binding.breakfastRecyclerView, nutrition.breakfast)
         setupRecyclerView(binding.lunchRecyclerView, nutrition.lunch)

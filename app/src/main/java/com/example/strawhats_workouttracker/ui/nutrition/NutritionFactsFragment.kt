@@ -1,11 +1,9 @@
 package com.example.strawhats_workouttracker.ui.nutrition
 
-import android.R
 import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,17 +12,11 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.strawhats_workouttracker.databinding.FragmentNutritionFactsBinding
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import java.text.DecimalFormat
-import java.time.LocalDate
-
-private const val TAG = "NutritionFactsFragment"
 
 class NutritionFactsFragment : Fragment() {
 
@@ -91,29 +83,58 @@ class NutritionFactsFragment : Fragment() {
             val nutrition = args.nutrition
             when (args.mealType) {
                 "breakfast" -> {
-                    nutrition.breakfast += FoodItem(foodItem.name, foodItem.calories, foodItem.serving_size_g, foodItem.fat_total_g, foodItem.protein_g, foodItem.carbohydrates_total_g)
-                    // Update other breakfast related fields similarly
+                    nutrition.breakfast += FoodItem(foodItem.name,
+                        foodItem.calories,
+                        foodItem.serving_size_g,
+                        foodItem.fat_total_g,
+                        foodItem.protein_g,
+                        foodItem.carbohydrates_total_g)
                 }
 
                 "lunch" -> {
-                    nutrition.lunch += FoodItem(foodItem.name, foodItem.calories, foodItem.serving_size_g, foodItem.fat_total_g, foodItem.protein_g, foodItem.carbohydrates_total_g)
-                    // Update other lunch related fields similarly
+                    nutrition.lunch += FoodItem(foodItem.name,
+                        foodItem.calories,
+                        foodItem.serving_size_g,
+                        foodItem.fat_total_g,
+                        foodItem.protein_g,
+                        foodItem.carbohydrates_total_g)
                 }
 
                 "dinner" -> {
-                    nutrition.dinner += FoodItem(foodItem.name, foodItem.calories, foodItem.serving_size_g, foodItem.fat_total_g, foodItem.protein_g, foodItem.carbohydrates_total_g)
-                    // Update other dinner related fields similarly
+                    nutrition.dinner += FoodItem(foodItem.name,
+                        foodItem.calories,
+                        foodItem.serving_size_g,
+                        foodItem.fat_total_g,
+                        foodItem.protein_g,
+                        foodItem.carbohydrates_total_g)
                 }
 
                 "snacks" -> {
-                    nutrition.snacks += FoodItem(foodItem.name, foodItem.calories, foodItem.serving_size_g, foodItem.fat_total_g, foodItem.protein_g, foodItem.carbohydrates_total_g)
-                    // Update other snacks related fields similarly
+                    nutrition.snacks += FoodItem(foodItem.name,
+                        foodItem.calories,
+                        foodItem.serving_size_g,
+                        foodItem.fat_total_g,
+                        foodItem.protein_g,
+                        foodItem.carbohydrates_total_g)
                 }
-//            val newNutrition = createNutrition()
-//            viewModel.addNutrition(newNutrition)
             }
+
+            // Calculate total calories and update the nutrition object
+            val totalCalories = calculateTotalCalories(nutrition)
+            nutrition.calories = totalCalories  // Assuming there's a totalCalories field in Nutrition
+
             viewModel.updateNutrition(nutrition)
+
+            val action = NutritionFactsFragmentDirections.actionNutritionFactsToNutritionDetail(nutrition)
+            findNavController().navigate(action)
         }
+    }
+
+    fun calculateTotalCalories(nutrition: Nutrition): Double {
+        return (nutrition.breakfast.sumOf { it.calories } +
+                nutrition.lunch.sumOf { it.calories } +
+                nutrition.dinner.sumOf { it.calories } +
+                nutrition.snacks.sumOf { it.calories })
     }
 
     private fun calculateNutrition(foodItem: FoodItem) {
@@ -187,11 +208,6 @@ class NutritionFactsFragment : Fragment() {
         binding.textFoodServingSizeG.text = "Serving size: ${decimalFormat.format(binding.textFoodServingSizeG.text.toString().split(" ")[2].toDouble())} $servingLabel"
 
     }
-
-//    private fun navigateToFragmentB(foodItem: FoodItem) {
-//        val action = NutritionFactsFragmentDirections.actionNutritionFactsToNutritionDetail()
-//        findNavController().navigate(action)
-//    }
 
     override fun onDestroyView() {
         super.onDestroyView()
