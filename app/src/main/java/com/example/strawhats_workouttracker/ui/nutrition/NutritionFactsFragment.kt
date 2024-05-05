@@ -117,13 +117,13 @@ class NutritionFactsFragment : Fragment() {
     }
 
     private fun calculateNutrition(foodItem: FoodItem) {
-        foodItem.serving_size_g = binding.editWeight.text.toString().toDoubleOrNull() ?: return
+        val quantity = binding.editWeight.text.toString().toDoubleOrNull() ?: return
 
         // Convert quantity to grams if necessary
         val quantityInGrams = when (selectedUnit) {
-            "ounces" -> foodItem.serving_size_g * 28.3495f
-            "pounds" -> foodItem.serving_size_g * 453.592f
-            else -> foodItem.serving_size_g
+            "ounces" -> quantity * 28.3495f
+            "pounds" -> quantity * 453.592f
+            else -> quantity
         }
 
         // Calculate nutrition based on quantity and unit
