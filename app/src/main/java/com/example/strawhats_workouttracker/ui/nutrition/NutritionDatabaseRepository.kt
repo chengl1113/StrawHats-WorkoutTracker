@@ -110,19 +110,6 @@ class NutritionDatabaseRepository(userId: String) {
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun addNutrition(nutrition: Nutrition) {
-        val dateKey = nutrition.date.format(DateTimeFormatter.ofPattern("yyyyMMdd"))
-        val newRef = databaseReference.push()  // Creates a new child with a unique key
-        newRef.setValue(nutrition)
-            .addOnSuccessListener {
-                Log.d(TAG, "Nutrition added successfully!")
-            }
-            .addOnFailureListener {
-                Log.e(TAG, "Failed to add nutrition", it)
-            }
-    }
-
-    @RequiresApi(Build.VERSION_CODES.O)
     fun updateNutrition(nutrition: Nutrition) {
         val dateKey = nutrition.date.format(DateTimeFormatter.ofPattern("yyyyMMdd"))
         databaseReference.child(dateKey).setValue(nutrition)

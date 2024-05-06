@@ -50,7 +50,11 @@ class NutritionListFragment : Fragment() {
     ): View {
         _binding = FragmentNutritionListBinding.inflate(inflater, container, false)
 
-        binding.nutritionRecyclerView.layoutManager = LinearLayoutManager(context)
+        // Set up the LinearLayoutManager with reverse layout
+        val layoutManager = LinearLayoutManager(context)
+        layoutManager.reverseLayout = true // Set reverseLayout to true
+        layoutManager.stackFromEnd = true // Set stackFromEnd to true to start filling from the bottom (now top)
+        binding.nutritionRecyclerView.layoutManager = layoutManager
 
         val newNutrition = Nutrition(
             LocalDate.now(),

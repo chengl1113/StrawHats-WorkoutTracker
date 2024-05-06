@@ -38,9 +38,9 @@
                     android:gravity="start"
                     android:text="@string/goal_calories"
                     android:textAppearance="?attr/textAppearanceHeadline5"
+                    android:fontFamily="sans-serif-condensed"
                     android:textColor="@color/off_white"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/nutritionCaloriesTextView"
@@ -54,9 +54,9 @@
                     android:gravity="end"
                     android:text="@string/current_calories"
                     android:textAppearance="?attr/textAppearanceHeadline5"
+                    android:fontFamily="sans-serif-condensed"
                     android:textColor="@color/off_white"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textSize="16sp" />
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
@@ -91,6 +91,7 @@
                         android:layout_weight="1"
                         android:text="@string/beakfast"
                         android:textAppearance="?attr/textAppearanceHeadline5"
+                        android:fontFamily="sans-serif-condensed"
                         android:textColor="@color/off_white"/>
 
                     <com.google.android.material.button.MaterialButton
@@ -142,6 +143,7 @@
                         android:layout_weight="1"
                         android:text="@string/lunch"
                         android:textAppearance="?attr/textAppearanceHeadline5"
+                        android:fontFamily="sans-serif-condensed"
                         android:textColor="@color/off_white"/>
 
                     <com.google.android.material.button.MaterialButton
@@ -193,6 +195,7 @@
                         android:layout_weight="1"
                         android:text="@string/dinner"
                         android:textAppearance="?attr/textAppearanceHeadline5"
+                        android:fontFamily="sans-serif-condensed"
                         android:textColor="@color/off_white"/>
 
                     <com.google.android.material.button.MaterialButton
@@ -244,6 +247,7 @@
                         android:layout_weight="1"
                         android:text="@string/snacks"
                         android:textAppearance="?attr/textAppearanceHeadline5"
+                        android:fontFamily="sans-serif-condensed"
                         android:textColor="@color/off_white"/>
 
                     <com.google.android.material.button.MaterialButton

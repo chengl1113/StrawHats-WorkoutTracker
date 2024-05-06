@@ -26,6 +26,8 @@ class NutritionViewModel : ViewModel() {
         updatedList.add(nutrition)
         _nutritions.value = updatedList
 
+        nutritionRepository.updateNutrition(nutrition)
+
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
