@@ -77,10 +77,12 @@ class GraphFragment : Fragment() {
 
     private fun getUniqueExercises(workouts: List<Workout>) : List<Exercise> {
         val exercises = mutableListOf<Exercise>()
+        val exerciseNames = mutableListOf<String>()
         for (w in workouts) {
             for (e in w.exercises) {
-                if (e !in exercises) {
+                if (e.name !in exerciseNames) {
                     exercises += e
+                    exerciseNames += e.name
                 }
             }
         }

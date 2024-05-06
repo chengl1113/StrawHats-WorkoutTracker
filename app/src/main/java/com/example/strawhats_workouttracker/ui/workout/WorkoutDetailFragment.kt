@@ -133,6 +133,7 @@ class WorkoutDetailFragment : Fragment(){
         val text = "$weight X $reps @ RPE $rpe"
         val setInfoTextView = newSet.findViewById<TextView>(R.id.set_detail)
         setInfoTextView.text = text
+        setInfoTextView.setTextColor(resources.getColor(R.color.off_white))
 
         // get the view for the exercise
         exercises[exerciseName]?.findViewById<LinearLayout>(R.id.setInfoContainer)

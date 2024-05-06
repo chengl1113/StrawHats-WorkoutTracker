@@ -8,9 +8,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:layout_marginStart="16dp"
-    android:layout_marginEnd="16dp"
-    android:layout_marginTop="16dp">
+    android:background="@color/darker_gray"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    android:paddingTop="16dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
 
@@ -26,6 +27,8 @@
             android:text="@string/_00_00_00"
             android:textSize="24sp"
             android:textStyle="bold"
+            android:fontFamily="sans-serif-condensed-light"
+            android:textColor="@color/off_white"
             app:layout_constraintTop_toBottomOf="@+id/rpe_slider"
             app:layout_constraintBottom_toTopOf="@id/endWorkoutButton"
             app:layout_constraintEnd_toEndOf="parent" />
@@ -36,6 +39,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="@string/new_exercise"
+            android:fontFamily="sans-serif-condensed-light"
+            android:textColor="@color/off_white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/newSetButton" />
 
@@ -47,6 +52,8 @@
             android:gravity="center_vertical"
             android:text="@string/set_1"
             android:textStyle="bold"
+            android:fontFamily="sans-serif-condensed-light"
+            android:textColor="@color/off_white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/exerciseTextField" />
 
@@ -74,6 +81,7 @@
             android:layout_marginEnd="121dp"
             android:gravity="center_vertical"
             android:text="@string/_1"
+            android:textColor="@color/off_white"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/exerciseTextField"
@@ -130,6 +138,7 @@
             android:layout_marginStart="8dp"
             android:gravity="center_vertical"
             android:text="@string/rpe_text"
+            android:textColor="@color/off_white"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/set_information_id" />
@@ -147,7 +156,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rpeText" />
+            app:layout_constraintTop_toBottomOf="@+id/rpeText"
+            app:thumbColor="@color/light_blue"
+            app:trackColorInactive="@color/light_gray"
+            app:trackColorActive="@color/light_blue" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/newSetButton"
@@ -155,8 +167,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="@string/new_set"
+            android:textColor="@color/off_white"
+            android:fontFamily="sans-serif-condensed-light"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rpe_slider"/>
+            app:layout_constraintTop_toBottomOf="@+id/rpe_slider" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/endWorkoutButton"
@@ -164,6 +178,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="228dp"
             android:text="@string/end_workout"
+            android:fontFamily="sans-serif-condensed-light"
             app:backgroundTint="@color/red"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/newSetButton" />
@@ -173,6 +188,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            app:dividerColor="@color/darker_gray"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/endWorkoutButton" />
 

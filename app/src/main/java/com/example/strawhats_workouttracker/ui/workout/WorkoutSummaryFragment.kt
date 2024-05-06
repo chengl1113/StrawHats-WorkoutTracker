@@ -54,6 +54,7 @@ class WorkoutSummaryFragment : Fragment() {
                 val newSet = layoutInflater.inflate(R.layout.list_item_set, null)
                 val setDetail = newSet.findViewById<TextView>(R.id.set_detail)
                 setDetail.text = "${set.weight} X ${set.reps} @ RPE ${set.rpe}"
+                setDetail.setTextColor(resources.getColor(R.color.off_white))
 
                 setContainer.addView(newSet)
             }

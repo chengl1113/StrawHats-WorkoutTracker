@@ -2,7 +2,9 @@ package com.example.strawhats_workouttracker.ui.nutrition
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.RecyclerView
+import com.example.strawhats_workouttracker.R
 import com.example.strawhats_workouttracker.databinding.ItemFoodBinding
 
 class FoodItemHolder(
@@ -29,6 +31,8 @@ class FoodItemAdapter(
     override fun onBindViewHolder(holder: FoodItemHolder, position: Int) {
         val foodItem = foodItems[position]
         holder.bind(foodItem)
+
+        holder.itemView.startAnimation(AnimationUtils.loadAnimation(holder.itemView.context, R.anim.animation))
     }
 
     override fun getItemCount(): Int = foodItems.size

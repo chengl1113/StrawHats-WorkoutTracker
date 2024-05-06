@@ -4,8 +4,10 @@ import android.annotation.SuppressLint
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
+import com.example.strawhats_workouttracker.R
 import com.example.strawhats_workouttracker.databinding.ListItemWorkoutBinding
 
 class WorkoutHolder(
@@ -42,6 +44,8 @@ class WorkoutAdapter(
     override fun onBindViewHolder(holder: WorkoutHolder, position: Int) {
         val workout = workouts[position]
         holder.bind(workout) { onWorkoutClicked(workout) }
+
+        holder.itemView.startAnimation(AnimationUtils.loadAnimation(holder.itemView.context, R.anim.animation))
     }
 
 }

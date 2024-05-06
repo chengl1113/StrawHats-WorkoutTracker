@@ -4,14 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.workout.WorkoutFragment">
+    tools:context=".ui.workout.WorkoutFragment"
+    android:background="@color/darker_gray">
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/newWorkoutButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
         android:text="@string/start_workout"
+        android:layout_margin="16dp"
+        android:fontFamily="sans-serif-condensed"
+        android:textColor="@color/off_white"
+        app:backgroundTint="@color/light_blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -19,13 +23,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/newWorkoutButton"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        >
 
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/workout_recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="100dp"
+            tools:listitem="@layout/list_item_workout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
