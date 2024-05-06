@@ -48,7 +48,12 @@ class WorkoutFragment : Fragment() {
     ): View {
         _binding = FragmentWorkoutBinding.inflate(inflater, container, false)
 
-        binding.workoutRecyclerView.layoutManager = LinearLayoutManager(context)
+//        binding.workoutRecyclerView.layoutManager = LinearLayoutManager(context)
+        // Set up the LinearLayoutManager with reverse layout
+        val layoutManager = LinearLayoutManager(context)
+        layoutManager.reverseLayout = true // Set reverseLayout to true
+        layoutManager.stackFromEnd = true // Set stackFromEnd to true to start filling from the bottom (now top)
+        binding.workoutRecyclerView.layoutManager = layoutManager
 
         binding.newWorkoutButton.setOnClickListener {
             findNavController().navigate(R.id.show_workout_detail)
