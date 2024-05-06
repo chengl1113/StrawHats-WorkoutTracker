@@ -1,10 +1,16 @@
 package com.example.strawhats_workouttracker.ui.nutrition
 
+import android.content.Context
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -42,19 +48,21 @@ class NutritionSearchFragment : Fragment() {
         val nutrition = args.nutrition
         val mealType = args.mealType
 
-        binding.searchNutrition.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                // Perform search when query submitted
-                query?.let { searchFood(it, nutrition, mealType) }
-                Log.d(TAG, "foodItems: $foodItems")
-                return true
+        binding.searchNutrition.setOnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH || (event?.action == KeyEvent.ACTION_DOWN && event.keyCode == KeyEvent.KEYCODE_ENTER)) {
+                val searchText = v.text.toString()
+                if (searchText.isNotEmpty()) {
+                    searchFood(searchText, nutrition, mealType)
+                    Log.d(TAG, "Search submitted: $searchText")
+                }
+                // Hide the keyboard
+                val inputMethodManager = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+                inputMethodManager?.hideSoftInputFromWindow(v.windowToken, 0)
+                true
+            } else {
+                false
             }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                // Handle text change if needed
-                return false
-            }
-        })
+        }
     }
 
     private fun searchFood(query: String, nutrition: Nutrition, mealType: String) {

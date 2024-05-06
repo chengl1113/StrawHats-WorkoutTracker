@@ -93,6 +93,7 @@
                         android:textAppearance="?attr/textAppearanceHeadline5"
                         android:fontFamily="sans-serif-condensed"
                         android:textSize="28sp"
+                        android:textStyle="bold"
                         android:textColor="@color/off_white"/>
 
                     <com.google.android.material.button.MaterialButton
@@ -146,6 +147,7 @@
                         android:textAppearance="?attr/textAppearanceHeadline5"
                         android:fontFamily="sans-serif-condensed"
                         android:textSize="28sp"
+                        android:textStyle="bold"
                         android:textColor="@color/off_white"/>
 
                     <com.google.android.material.button.MaterialButton
@@ -199,6 +201,7 @@
                         android:textAppearance="?attr/textAppearanceHeadline5"
                         android:fontFamily="sans-serif-condensed"
                         android:textSize="28sp"
+                        android:textStyle="bold"
                         android:textColor="@color/off_white"/>
 
                     <com.google.android.material.button.MaterialButton
@@ -252,6 +255,7 @@
                         android:textAppearance="?attr/textAppearanceHeadline5"
                         android:fontFamily="sans-serif-condensed"
                         android:textSize="28sp"
+                        android:textStyle="bold"
                         android:textColor="@color/off_white"/>
 
                     <com.google.android.material.button.MaterialButton

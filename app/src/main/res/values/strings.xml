@@ -58,6 +58,7 @@
     <string name="log_out">LOG OUT</string>
     <string name="account">Account</string>
     <string name="update">Update</string>
+    <string name="search">Search…</string>
     <string name="log_in">LOG IN</string>
     <string name="sign_up_text">SIGN UP</string>
 </resources>
