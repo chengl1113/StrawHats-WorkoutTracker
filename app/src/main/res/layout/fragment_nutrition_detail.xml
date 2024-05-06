@@ -1,170 +1,272 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
+
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="16dp">
+    android:fillViewport="true"
+    android:background="@color/darker_gray">
 
     <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:layout_margin="16dp">
 
-        <TextView
-            android:layout_width="379dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginRight="4dp"
-            android:layout_marginBottom="4dp"
-            android:layout_weight="1"
-            android:gravity="start"
-            android:text="@string/goal_calories"
-            android:textAppearance="?attr/textAppearanceHeadline5"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/nutritionCaloriesTextView"
+        <com.google.android.material.card.MaterialCardView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginRight="4dp"
-            android:layout_marginBottom="4dp"
-            android:layout_weight="1"
-            android:gravity="end"
-            android:text="@string/current_calories"
-            android:textAppearance="?attr/textAppearanceHeadline5"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-    </LinearLayout>
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            app:cardBackgroundColor="@color/light_blue"
+            app:cardElevation="8dp"
+            app:cardCornerRadius="8dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/nutritionDateTextView"
-            android:layout_width="wrap_content"
+                <TextView
+                    android:layout_width="299dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_weight="1"
+                    android:gravity="start"
+                    android:text="@string/goal_calories"
+                    android:textAppearance="?attr/textAppearanceHeadline5"
+                    android:textColor="@color/off_white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/nutritionCaloriesTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:text="@string/current_calories"
+                    android:textAppearance="?attr/textAppearanceHeadline5"
+                    android:textColor="@color/off_white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+
+        <com.google.android.material.card.MaterialCardView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="?attr/textAppearanceHeadline5" />
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            app:cardBackgroundColor="@color/light_blue"
+            app:cardElevation="8dp"
+            app:cardCornerRadius="8dp">
 
-        <TextView
-            android:layout_width="120dp"
-            android:layout_height="50dp"
-            android:text="@string/beakfast"
-            android:textAppearance="?attr/textAppearanceHeadline5" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/breakfast_add_button"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:text="@string/plus_sign" />
-    </LinearLayout>
+                <!-- LinearLayout for the header (Title and Button) -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="1"
+                        android:text="@string/beakfast"
+                        android:textAppearance="?attr/textAppearanceHeadline5"
+                        android:textColor="@color/off_white"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/breakfastRecyclerView"
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/breakfast_add_button"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:text="@string/plus_sign" />
+                </LinearLayout>
+
+                <!-- LinearLayout for the RecyclerView -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/breakfastRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="120dp"
-            android:layout_height="50dp"
-            android:text="@string/lunch"
-            android:textAppearance="?attr/textAppearanceHeadline5" />
-
-        <Button
-            android:id="@+id/lunch_add_button"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:text="@string/plus_sign" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/lunchRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="120dp"
-            android:layout_height="50dp"
-            android:text="@string/dinner"
-            android:textAppearance="?attr/textAppearanceHeadline5" />
-
-        <Button
-            android:id="@+id/dinner_add_button"
-            android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:text="@string/plus_sign" />
-    </LinearLayout>
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            app:cardBackgroundColor="@color/light_blue"
+            app:cardElevation="8dp"
+            app:cardCornerRadius="8dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/dinnerRecyclerView"
+                <!-- LinearLayout for the header (Title and Button) -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="1"
+                        android:text="@string/lunch"
+                        android:textAppearance="?attr/textAppearanceHeadline5"
+                        android:textColor="@color/off_white"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/lunch_add_button"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:text="@string/plus_sign" />
+                </LinearLayout>
+
+                <!-- LinearLayout for the RecyclerView -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/lunchRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="120dp"
-            android:layout_height="50dp"
-            android:text="@string/snacks"
-            android:textAppearance="?attr/textAppearanceHeadline5" />
-
-        <Button
-            android:id="@+id/snacks_add_button"
-            android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:text="@string/plus_sign" />
-    </LinearLayout>
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            app:cardBackgroundColor="@color/light_blue"
+            app:cardElevation="8dp"
+            app:cardCornerRadius="8dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/snacksRecyclerView"
+                <!-- LinearLayout for the header (Title and Button) -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="1"
+                        android:text="@string/dinner"
+                        android:textAppearance="?attr/textAppearanceHeadline5"
+                        android:textColor="@color/off_white"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/dinner_add_button"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:text="@string/plus_sign" />
+                </LinearLayout>
+
+                <!-- LinearLayout for the RecyclerView -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/dinnerRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            app:cardBackgroundColor="@color/light_blue"
+            app:cardElevation="8dp"
+            app:cardCornerRadius="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- LinearLayout for the header (Title and Button) -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="1"
+                        android:text="@string/snacks"
+                        android:textAppearance="?attr/textAppearanceHeadline5"
+                        android:textColor="@color/off_white"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/snacks_add_button"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:text="@string/plus_sign" />
+                </LinearLayout>
+
+                <!-- LinearLayout for the RecyclerView -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/snacksRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
 
-</LinearLayout>
+</androidx.core.widget.NestedScrollView>

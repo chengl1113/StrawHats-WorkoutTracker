@@ -1,5 +1,6 @@
 package com.example.strawhats_workouttracker.ui.nutrition
 
+import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import android.text.Editable
@@ -173,6 +174,7 @@ class NutritionFactsFragment : Fragment() {
         return adjustedFoodItem
     }
 
+    @SuppressLint("SetTextI18n")
     private fun populateUIWithFoodItem(foodItem: FoodItem) {
         binding.textFoodName.text = "Food: ${foodItem.name}"
         binding.textFoodCalories.text = "Calories: ${foodItem.calories} kcal"
@@ -182,6 +184,7 @@ class NutritionFactsFragment : Fragment() {
         binding.textCarbohydratesTotalG.text = "Carbohydrates: ${foodItem.carbohydrates_total_g} g"
     }
 
+    @SuppressLint("SetTextI18n")
     private fun updateUIWithNutritionInfo(foodItem: FoodItem) {
         val servingLabel = when (selectedUnit) {
             "grams" -> "g"
@@ -197,6 +200,7 @@ class NutritionFactsFragment : Fragment() {
         binding.textCarbohydratesTotalG.text = "Carbohydrates: ${decimalFormat.format(foodItem.carbohydrates_total_g)} g"
     }
 
+    @SuppressLint("SetTextI18n")
     private fun updateLabelsBasedOnUnit(foodItem: FoodItem) {
         val servingLabel = when (selectedUnit) {
             "grams" -> "g"

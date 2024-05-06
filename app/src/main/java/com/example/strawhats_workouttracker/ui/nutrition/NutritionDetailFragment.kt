@@ -41,7 +41,7 @@ class NutritionDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val nutrition = args.nutrition
-        binding.nutritionCaloriesTextView.text = String.format("%.0f calories", nutrition.calories)
+        binding.nutritionCaloriesTextView.text = String.format("Logged: %.0f calories", nutrition.calories)
 
         setupRecyclerView(binding.breakfastRecyclerView, nutrition.breakfast)
         setupRecyclerView(binding.lunchRecyclerView, nutrition.lunch)

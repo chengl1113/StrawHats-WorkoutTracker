@@ -18,12 +18,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.strawhats_workouttracker.R
 import com.example.strawhats_workouttracker.databinding.FragmentNutritionListBinding
-import com.example.strawhats_workouttracker.databinding.FragmentWorkoutBinding
-import com.example.strawhats_workouttracker.ui.workout.WorkoutAdapter
-import com.example.strawhats_workouttracker.ui.workout.WorkoutFragmentDirections
 import java.time.LocalDate
-import java.util.Date
-import java.util.UUID
 
 private const val TAG = "NutritionListFragment"
 class NutritionListFragment : Fragment() {

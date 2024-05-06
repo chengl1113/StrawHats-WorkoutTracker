@@ -11,8 +11,8 @@ class FoodItemHolder(
     fun bind(foodItem: FoodItem) {
         // Manually setting the text for each TextView
         binding.textViewFoodName.text = foodItem.name
-        binding.textViewServing.text = String.format("Serving: %.0f g", foodItem.serving_size_g)
-        binding.textViewCalories.text = String.format("%.0f kcal", foodItem.calories)
+        binding.textViewServing.text = String.format("Serving: %.0fg", foodItem.serving_size_g)
+        binding.textViewCalories.text = String.format("%.0fkcal", foodItem.calories)
 
     }
 }

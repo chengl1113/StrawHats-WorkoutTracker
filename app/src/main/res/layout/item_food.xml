@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
+    android:gravity="center_vertical"
     android:padding="8dp">
 
     <TextView
@@ -11,7 +12,9 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="name"
-        android:textAppearance="?attr/textAppearanceListItem" />
+        android:gravity="center_vertical"
+        android:textAppearance="?attr/textAppearanceListItem"
+        android:textColor="@color/off_white"/>
 
     <TextView
         android:id="@+id/textViewServing"
@@ -19,12 +22,16 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="serving size: "
-        android:textAppearance="?attr/textAppearanceListItem" />
+        android:gravity="center_vertical"
+        android:textAppearance="?attr/textAppearanceListItem"
+        android:textColor="@color/off_white"/>
 
     <TextView
         android:id="@+id/textViewCalories"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center_vertical"
         android:text="calories"
-        android:textAppearance="?attr/textAppearanceListItem" />
+        android:textAppearance="?attr/textAppearanceListItem"
+        android:textColor="@color/off_white"/>
 </LinearLayout>
