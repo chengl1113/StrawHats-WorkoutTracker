@@ -83,7 +83,7 @@ class GraphDetailFragment : Fragment() {
         for ((date, sets) in sortedData) {
             var total = 0.0
             for (set in sets) {
-                val max = (set.weight * (1 + (set.reps / 30.0))) / (1.0278 - (0.0278 * set.rpe))
+                val max = set.weight / (1.0278 - (0.0278 * set.reps))
                 total += max
             }
             val average = total / sets.size

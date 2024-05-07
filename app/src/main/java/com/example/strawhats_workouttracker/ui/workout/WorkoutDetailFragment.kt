@@ -84,7 +84,7 @@ class WorkoutDetailFragment : Fragment(){
         // updating views and stuff
 
         binding.newExerciseButton.setOnClickListener{
-           addNewExercise()
+            addNewExercise()
         }
 
         binding.newSetButton.setOnClickListener{
@@ -112,9 +112,6 @@ class WorkoutDetailFragment : Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // start timer when the view is created
-        running = true
-        handler.post(runnable)
     }
 
     private fun addNewSet() {

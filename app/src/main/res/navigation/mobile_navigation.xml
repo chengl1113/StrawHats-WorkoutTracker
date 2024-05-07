@@ -99,7 +99,8 @@
         android:id="@+id/nutritionFactsFragment"
         android:name="com.example.strawhats_workouttracker.ui.nutrition.NutritionFactsFragment"
         android:label="NutritionFactsFragment"
-        android:layout="@layout/fragment_nutrition_facts">
+        android:layout="@layout/fragment_nutrition_facts"
+        tools:layout="@layout/fragment_nutrition_facts">
         <argument
             android:name="foodItem"
             app:argType="com.example.strawhats_workouttracker.ui.nutrition.FoodItem" />
