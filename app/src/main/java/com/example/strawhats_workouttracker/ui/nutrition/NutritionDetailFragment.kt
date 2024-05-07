@@ -7,11 +7,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.strawhats_workouttracker.R
 import com.example.strawhats_workouttracker.databinding.FragmentNutritionDetailBinding
 import java.text.DecimalFormat
 
@@ -54,6 +56,36 @@ class NutritionDetailFragment : Fragment() {
         val nutrition = args.nutrition
         binding.nutritionCaloriesTextView.text = "Logged: ${decimalFormat.format(nutrition.calories)} kcal"
         binding.goalCalorieText.text = "Goal: ${decimalFormat.format(goalCalories.toDouble())} kcal"
+
+        binding.topCardView.setOnClickListener {
+            if (binding.additionalInfoLayout.visibility == View.VISIBLE) {
+                // hide it
+                binding.additionalInfoLayout.visibility = View.GONE
+                binding.additionalInfoLayout.startAnimation(AnimationUtils.loadAnimation(context, R.anim.slide_up))
+                binding.expandMoreIcon.setImageResource(R.drawable.expand_more_24px)
+
+            } else {
+                // show it
+                binding.additionalInfoLayout.visibility = View.VISIBLE
+                binding.additionalInfoLayout.startAnimation(AnimationUtils.loadAnimation(context, R.anim.slide_down))
+                binding.expandMoreIcon.setImageResource(R.drawable.expand_less_24px)
+                val protein = (nutrition.breakfast.sumOf { it.protein_g } +
+                        nutrition.lunch.sumOf { it.protein_g } +
+                        nutrition.dinner.sumOf { it.protein_g } +
+                        nutrition.snacks.sumOf { it.protein_g })
+                val carbs = (nutrition.breakfast.sumOf { it.carbohydrates_total_g } +
+                        nutrition.lunch.sumOf { it.carbohydrates_total_g } +
+                        nutrition.dinner.sumOf { it.carbohydrates_total_g } +
+                        nutrition.snacks.sumOf { it.carbohydrates_total_g })
+                val fat = (nutrition.breakfast.sumOf { it.fat_total_g } +
+                        nutrition.lunch.sumOf { it.fat_total_g } +
+                        nutrition.dinner.sumOf { it.fat_total_g } +
+                        nutrition.snacks.sumOf { it.fat_total_g })
+                binding.nutritionTotalFatAdditionalTextView.text = "Fat: ${decimalFormat.format(fat)} g"
+                binding.nutritionProteinAdditionalTextView.text = "Protein: ${decimalFormat.format(protein)} g"
+                binding.nutritionCarbsAdditionalTextView.text = "Carbs: ${decimalFormat.format(carbs)} g"
+            }
+        }
 
         setupRecyclerView(binding.breakfastRecyclerView, nutrition.breakfast)
         setupRecyclerView(binding.lunchRecyclerView, nutrition.lunch)

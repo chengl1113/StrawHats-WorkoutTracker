@@ -2,8 +2,6 @@ package com.example.strawhats_workouttracker.ui.nutrition
 
 import android.content.Context
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import android.view.KeyEvent
 import android.view.LayoutInflater
@@ -11,17 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
-import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.strawhats_workouttracker.databinding.FragmentNutritionSearchBinding
 import kotlinx.coroutines.launch
-import java.time.LocalDate
-import java.util.Date
-import kotlin.math.log
 
 
 private const val TAG = "NutritionSearchFragment"
@@ -76,6 +69,7 @@ class NutritionSearchFragment : Fragment() {
                 selectedFoodItem?.let {
                     val action = NutritionSearchFragmentDirections.actionNutritionSearchFragmentToNutritionFactsFragment(selectedFoodItem, nutrition, mealType)
                     findNavController().navigate(action)
+
                 }
                 Log.d(TAG, "Response received: $response")
                 // Handle response as needed

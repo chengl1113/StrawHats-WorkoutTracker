@@ -26,7 +26,7 @@ class NutritionListFragment : Fragment() {
     // get userId
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var userId : String
-
+    private var goal : Int = 0
 
 
     private var _binding: FragmentNutritionListBinding? = null
@@ -40,6 +40,7 @@ class NutritionListFragment : Fragment() {
         super.onCreate(savedInstanceState)
         sharedPreferences = requireActivity().getSharedPreferences("LoginInfo", Context.MODE_PRIVATE)
         userId = sharedPreferences.getString("userId", "none").toString()
+        goal = sharedPreferences.getInt("calorie goal", 0)
         setHasOptionsMenu(true)
     }
 
@@ -86,7 +87,7 @@ class NutritionListFragment : Fragment() {
             // Hide the 'New Day' button if an entry for today already exists
             binding.newDayButton.visibility = if (existsToday) View.GONE else View.VISIBLE
 
-            val adapter = NutritionListAdapter(nutritions) { nutrition ->
+            val adapter = NutritionListAdapter(nutritions, goal) { nutrition ->
                 val action = NutritionListFragmentDirections.showNutritionDetail(nutrition)
                 findNavController().navigate(action)
             }

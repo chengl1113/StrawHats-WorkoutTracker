@@ -136,6 +136,9 @@ class NutritionFactsFragment : Fragment() {
 
             val action = NutritionFactsFragmentDirections.actionNutritionFactsToNutritionDetail(nutrition)
             findNavController().navigate(action)
+            findNavController().popBackStack()
+            findNavController().popBackStack()
+            findNavController().popBackStack()
         }
     }
 
