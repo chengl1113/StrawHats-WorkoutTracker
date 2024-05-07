@@ -9,9 +9,10 @@
         android:id="@+id/graph_exercise_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textAlignment="center"
         android:textAppearance="?attr/textAppearanceTitleLarge"
-        android:textSize="28sp"
-        android:textAlignment="center"/>
+        android:textColor="@color/off_white"
+        android:textSize="28sp" />
 
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/line_chart"

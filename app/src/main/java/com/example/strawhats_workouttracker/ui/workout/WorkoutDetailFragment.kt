@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.strawhats_workouttracker.R
 import com.example.strawhats_workouttracker.databinding.FragmentWorkoutDetailBinding
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import java.time.LocalDate
@@ -121,15 +122,26 @@ class WorkoutDetailFragment : Fragment(){
         updateSetCounter()
         // check if exercise has been added yet
         val exerciseName = binding.exerciseNameText.text.toString()
-        if (exerciseName !in exercises.keys) {
-            // add a new exercise
-            addNewExercise()
-        }
+
         // update existing card view
         val newSet = layoutInflater.inflate(R.layout.list_item_set, null)
         val weight = binding.weightNumberText.text.toString()
         val reps = binding.repsNumberText.text.toString()
         val rpe = binding.rpeSlider.value.toString()
+        if (exerciseName == "" || weight == "" || reps == "" || rpe == "") {
+            view?.let {
+                Snackbar.make(it, R.string.exercise_error, Snackbar.LENGTH_SHORT)
+                    .setBackgroundTint(resources.getColor(R.color.light_blue))
+                    .setTextColor(resources.getColor(R.color.off_white))
+                    .show()
+            }
+            return
+        }
+
+        if (exerciseName !in exercises.keys) {
+            // add a new exercise
+            addNewExercise()
+        }
         val text = "$weight X $reps @ RPE $rpe"
         val setInfoTextView = newSet.findViewById<TextView>(R.id.set_detail)
         setInfoTextView.text = text
@@ -163,6 +175,15 @@ class WorkoutDetailFragment : Fragment(){
 
     private fun addNewExercise() {
         val exerciseName = binding.exerciseNameText.text.toString()
+        if (exerciseName == "") {
+            view?.let {
+                Snackbar.make(it, R.string.exercise_error, Snackbar.LENGTH_SHORT)
+                    .setBackgroundTint(resources.getColor(R.color.light_blue))
+                    .setTextColor(resources.getColor(R.color.off_white))
+                    .show()
+            }
+            return
+        }
         val newExercise = layoutInflater.inflate(R.layout.list_item_exercise, null)
         val exerciseTitleView = newExercise.findViewById<TextView>(R.id.exercise_title)
         exerciseTitleView.text = exerciseName

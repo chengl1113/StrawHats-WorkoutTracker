@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.navigation.fragment.navArgs
+import com.example.strawhats_workouttracker.R
 import com.example.strawhats_workouttracker.databinding.FragmentGraphDetailBinding
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
@@ -100,13 +101,21 @@ class GraphDetailFragment : Fragment() {
         // Create a data set
         val dataSet = LineDataSet(entries, "Data")
 
-        dataSet.valueTextSize = 12f
+        dataSet.color = resources.getColor(R.color.off_white)
+        dataSet.valueTextSize = 16f
 
         // Set data to the chart
         chart.data = LineData(dataSet)
+        chart.data.setValueTextColor(resources.getColor(R.color.off_white))
 
         // Format x-axis labels as dates
         chart.xAxis.valueFormatter = DateAxisValueFormatter()
+        chart.xAxis.textColor = resources.getColor(R.color.off_white)
+        chart.axisLeft.textColor = resources.getColor(R.color.off_white)
+        chart.axisRight.textColor = resources.getColor(R.color.off_white)
+        chart.legend.textColor = resources.getColor(R.color.off_white)
+        chart.description.text = ""
+
 
         // Refresh chart
         chart.invalidate()
