@@ -12,7 +12,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.example.strawhats_workouttracker.databinding.FragmentAccountBinding
+import com.google.android.material.snackbar.Snackbar
 
+private const val TAG = "AccountFragment"
 class AccountFragment : Fragment() {
 
     private var _binding: FragmentAccountBinding? = null
@@ -51,9 +53,11 @@ class AccountFragment : Fragment() {
             }
 
             override fun afterTextChanged(s: Editable?) {
-                val editor = sharedPreferences.edit()
-                editor.putString("username", s.toString())
-                editor.apply()
+                if (s.toString() != "") {
+                    val editor = sharedPreferences.edit()
+                    editor.putString("username", s.toString())
+                    editor.apply()
+                }
             }
         })
 
@@ -66,9 +70,17 @@ class AccountFragment : Fragment() {
             }
 
             override fun afterTextChanged(s: Editable?) {
-                val editor = sharedPreferences.edit()
-                editor.putInt("calorie goal", s.toString().toInt())
-                editor.apply()
+                if (s.toString() != "") {
+                    val editor = sharedPreferences.edit()
+                    editor.putInt("calorie goal", s.toString().toInt())
+                    editor.apply()
+                    view?.let {
+                        Snackbar.make(it, R.string.goals_saved, Snackbar.LENGTH_SHORT)
+                            .setBackgroundTint(resources.getColor(R.color.light_blue))
+                            .setTextColor(resources.getColor(R.color.off_white))
+                            .show()
+                    }
+                }
             }
         })
 
