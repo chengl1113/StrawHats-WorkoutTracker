@@ -8,10 +8,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
-import android.widget.Spinner
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -26,7 +23,7 @@ class NutritionFactsFragment : Fragment() {
     private var _binding: FragmentNutritionFactsBinding? = null
     private val binding get() = _binding!!
 
-    private val decimalFormat = DecimalFormat("#.##")
+    private val decimalFormat = DecimalFormat("#,###.##")
 
     private val args: NutritionFactsFragmentArgs by navArgs()
 
@@ -76,6 +73,22 @@ class NutritionFactsFragment : Fragment() {
         })
 
         binding.addFoodButton.setOnClickListener {
+            if (binding.editWeight.text.toString().toDoubleOrNull() != null) {
+                val quantity = binding.editWeight.text.toString().toDouble()
+                // Convert quantity to grams if necessary
+                val quantityInGrams = when (selectedUnit) {
+                    "ounces" -> quantity * 28.3495f
+                    "pounds" -> quantity * 453.592f
+                    else -> quantity
+                }
+                foodItem.calories = foodItem.calories * (quantityInGrams / foodItem.serving_size_g)
+                foodItem.fat_total_g = foodItem.fat_total_g * (quantityInGrams / foodItem.serving_size_g)
+                foodItem.protein_g = foodItem.protein_g * (quantityInGrams / foodItem.serving_size_g)
+                foodItem.carbohydrates_total_g = foodItem.carbohydrates_total_g * (quantityInGrams / foodItem.serving_size_g)
+                foodItem.serving_size_g = quantityInGrams
+            }
+
+
             val nutrition = args.nutrition
             when (args.mealType) {
                 "breakfast" -> {
@@ -160,23 +173,17 @@ class NutritionFactsFragment : Fragment() {
             foodItem.carbohydrates_total_g * (quantityInGrams / foodItem.serving_size_g)
         )
 
-        foodItem.calories = foodItem.calories * (quantityInGrams / foodItem.serving_size_g)
-        foodItem.serving_size_g = quantityInGrams
-        foodItem.fat_total_g = foodItem.fat_total_g * (quantityInGrams / foodItem.serving_size_g)
-        foodItem.protein_g = foodItem.protein_g * (quantityInGrams / foodItem.serving_size_g)
-        foodItem.carbohydrates_total_g = foodItem.carbohydrates_total_g * (quantityInGrams / foodItem.serving_size_g)
-
         return adjustedFoodItem
     }
 
     @SuppressLint("SetTextI18n")
     private fun populateUIWithFoodItem(foodItem: FoodItem) {
         binding.textFoodName.text = "Food: ${foodItem.name}"
-        binding.textFoodCalories.text = "${foodItem.calories} kcal"
+        binding.textFoodCalories.text = "${decimalFormat.format(foodItem.calories)} kcal"
         binding.textFoodServingSizeG.text = "Serving size: ${decimalFormat.format(foodItem.serving_size_g)} g"
-        binding.textFoodFatTotalG.text = "Total Fat: ${foodItem.fat_total_g} g"
-        binding.textFoodProteinG.text = "Protein: ${foodItem.protein_g} g"
-        binding.textCarbohydratesTotalG.text = "Carbohydrates: ${foodItem.carbohydrates_total_g} g"
+        binding.textFoodFatTotalG.text = "Total Fat: ${decimalFormat.format(foodItem.fat_total_g)} g"
+        binding.textFoodProteinG.text = "Protein: ${decimalFormat.format(foodItem.protein_g)} g"
+        binding.textCarbohydratesTotalG.text = "Carbohydrates: ${decimalFormat.format(foodItem.carbohydrates_total_g)} g"
     }
 
     @SuppressLint("SetTextI18n")

@@ -6,15 +6,18 @@ import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.RecyclerView
 import com.example.strawhats_workouttracker.R
 import com.example.strawhats_workouttracker.databinding.ItemFoodBinding
+import java.text.DecimalFormat
 
 class FoodItemHolder(
     private val binding: ItemFoodBinding
 ) : RecyclerView.ViewHolder(binding.root) {
+
+    private val decimalFormat = DecimalFormat("#,###")
     fun bind(foodItem: FoodItem) {
         // Manually setting the text for each TextView
         binding.textViewFoodName.text = foodItem.name
-        binding.textViewServing.text = String.format("Serving: %.0fg", foodItem.serving_size_g)
-        binding.textViewCalories.text = String.format("%.0fkcal", foodItem.calories)
+        binding.textViewServing.text = "Serving: ${decimalFormat.format(foodItem.serving_size_g)}g"
+        binding.textViewCalories.text = "${decimalFormat.format(foodItem.calories)} kcal"
 
     }
 }

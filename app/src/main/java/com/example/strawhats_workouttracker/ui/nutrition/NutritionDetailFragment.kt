@@ -12,6 +12,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.strawhats_workouttracker.databinding.FragmentNutritionDetailBinding
+import java.text.DecimalFormat
 
 private const val TAG = "NutritionDetailFragment"
 
@@ -19,6 +20,8 @@ class NutritionDetailFragment : Fragment() {
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var goalCalories: String
     private val args: NutritionDetailFragmentArgs by navArgs()
+
+    private val decimalFormat = DecimalFormat("#,###")
 
     private var _binding: FragmentNutritionDetailBinding? = null
     private val binding
@@ -47,7 +50,7 @@ class NutritionDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val nutrition = args.nutrition
-        binding.nutritionCaloriesTextView.text = String.format("Logged: %.0f calories", nutrition.calories)
+        binding.nutritionCaloriesTextView.text = "Logged: ${decimalFormat.format(nutrition.calories)} kcal"
         binding.goalCalorieText.text = String.format("Goal: $goalCalories calories")
 
         setupRecyclerView(binding.breakfastRecyclerView, nutrition.breakfast)

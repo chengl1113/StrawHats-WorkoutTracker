@@ -28,6 +28,7 @@ class NutritionListFragment : Fragment() {
     private lateinit var userId : String
 
 
+
     private var _binding: FragmentNutritionListBinding? = null
     private val binding
         get() = checkNotNull(_binding) {
