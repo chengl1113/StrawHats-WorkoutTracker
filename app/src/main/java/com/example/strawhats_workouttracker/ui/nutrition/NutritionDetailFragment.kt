@@ -1,5 +1,7 @@
 package com.example.strawhats_workouttracker.ui.nutrition
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +16,8 @@ import com.example.strawhats_workouttracker.databinding.FragmentNutritionDetailB
 private const val TAG = "NutritionDetailFragment"
 
 class NutritionDetailFragment : Fragment() {
+    private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var goalCalories: String
     private val args: NutritionDetailFragmentArgs by navArgs()
 
     private var _binding: FragmentNutritionDetailBinding? = null
@@ -25,6 +29,8 @@ class NutritionDetailFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        sharedPreferences = requireActivity().getSharedPreferences("LoginInfo", Context.MODE_PRIVATE)
+        goalCalories = sharedPreferences.getInt("calorie goal", 0).toString()
     }
 
     override fun onCreateView(
@@ -42,6 +48,7 @@ class NutritionDetailFragment : Fragment() {
 
         val nutrition = args.nutrition
         binding.nutritionCaloriesTextView.text = String.format("Logged: %.0f calories", nutrition.calories)
+        binding.goalCalorieText.text = String.format("Goal: $goalCalories calories")
 
         setupRecyclerView(binding.breakfastRecyclerView, nutrition.breakfast)
         setupRecyclerView(binding.lunchRecyclerView, nutrition.lunch)

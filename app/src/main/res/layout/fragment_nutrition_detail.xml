@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
@@ -13,7 +14,6 @@
         android:layout_margin="16dp">
 
         <com.google.android.material.card.MaterialCardView
-            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -28,6 +28,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/goalCalorieText"
                     android:layout_width="299dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
@@ -35,10 +36,10 @@
                     android:layout_marginRight="4dp"
                     android:layout_marginBottom="4dp"
                     android:layout_weight="1"
+                    android:fontFamily="sans-serif"
                     android:gravity="start"
                     android:text="@string/goal_calories"
                     android:textAppearance="?attr/textAppearanceHeadline5"
-                    android:fontFamily="sans-serif"
                     android:textColor="@color/off_white"
                     android:textSize="16sp" />
 
