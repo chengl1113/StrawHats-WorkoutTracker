@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModel
 class NutritionViewModel : ViewModel() {
     var userId = "-NvBHWxO-OSvtZEFgnbN"
 
-
+    // LiveData that holds a list of Nutrition
     private val _nutritions = MutableLiveData<List<Nutrition>>()
     val nutritions: LiveData<List<Nutrition>> = _nutritions
 
@@ -21,18 +21,19 @@ class NutritionViewModel : ViewModel() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun addNutrition(nutrition: Nutrition) {
-        // First, update the LiveData to update the UI immediately.
+        // Update LiveData with the new nutrition object
         val updatedList = _nutritions.value?.toMutableList() ?: mutableListOf()
         updatedList.add(nutrition)
         _nutritions.value = updatedList
 
+        // Update nutrition data in the repository as well
         nutritionRepository.updateNutrition(nutrition)
 
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun updateNutrition(nutrition: Nutrition) {
-        // First, update the LiveData to update the UI immediately.
+        // Update LiveData list
         val updatedList = _nutritions.value?.toMutableList() ?: mutableListOf()
         val index = updatedList.indexOfFirst { it.date == nutrition.date }
         if (index != -1) {
@@ -40,7 +41,7 @@ class NutritionViewModel : ViewModel() {
             _nutritions.value = updatedList
         }
 
-        // Then, update the nutrition data in Firebase to store it persistently.
+        // Then, update the nutrition data in Firebase
         nutritionRepository.updateNutrition(nutrition)
     }
 

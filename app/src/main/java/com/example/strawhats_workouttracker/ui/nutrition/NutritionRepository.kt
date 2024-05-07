@@ -13,6 +13,7 @@ class NutritionRepository {
             .baseUrl("https://api.api-ninjas.com")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
+
         nutritionApi = retrofit.create(NutritionApi::class.java)
     }
 

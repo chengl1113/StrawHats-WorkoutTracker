@@ -38,6 +38,7 @@ class NutritionListFragment : Fragment() {
     private val nutritionViewModel: NutritionViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Initialize sharedPreferences and user data
         sharedPreferences = requireActivity().getSharedPreferences("LoginInfo", Context.MODE_PRIVATE)
         userId = sharedPreferences.getString("userId", "none").toString()
         goal = sharedPreferences.getInt("calorie goal", 0)
@@ -58,6 +59,7 @@ class NutritionListFragment : Fragment() {
         layoutManager.stackFromEnd = true // Set stackFromEnd to true to start filling from the bottom (now top)
         binding.nutritionRecyclerView.layoutManager = layoutManager
 
+        // New Nutrition object if this date has never been tracked
         val newNutrition = Nutrition(
             LocalDate.now(),
             calories = 0.0,
@@ -87,6 +89,7 @@ class NutritionListFragment : Fragment() {
             // Hide the 'New Day' button if an entry for today already exists
             binding.newDayButton.visibility = if (existsToday) View.GONE else View.VISIBLE
 
+            // Set up adapter to pass nutrition object to next fragment
             val adapter = NutritionListAdapter(nutritions, goal) { nutrition ->
                 val action = NutritionListFragmentDirections.showNutritionDetail(nutrition)
                 findNavController().navigate(action)

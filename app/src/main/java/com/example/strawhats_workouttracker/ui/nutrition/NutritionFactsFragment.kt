@@ -23,10 +23,12 @@ class NutritionFactsFragment : Fragment() {
     private var _binding: FragmentNutritionFactsBinding? = null
     private val binding get() = _binding!!
 
+    // Formatter for numbers with decimals and commas
     private val decimalFormat = DecimalFormat("#,###.##")
 
     private val args: NutritionFactsFragmentArgs by navArgs()
 
+    // Unit for food item, default is grams
     private var selectedUnit: String = "grams"
 
     private val viewModel: NutritionViewModel by viewModels()
@@ -44,16 +46,17 @@ class NutritionFactsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Display the food item details
         val foodItem = args.foodItem
-
-        // Populate the layout with information from the FoodItem object
         populateUIWithFoodItem(foodItem)
 
+        // Set up dropdown values
         val options = arrayOf("grams", "ounces", "pounds")
         val adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, options)
         val autoCompleteTextView = binding.autoCompleteTextView
         autoCompleteTextView.setAdapter(adapter)
 
+        // Listener for unit selection
         autoCompleteTextView.setOnItemClickListener { parent, view, position, id ->
             // Get the selected item using position
             selectedUnit = parent.adapter.getItem(position) as String
@@ -61,18 +64,19 @@ class NutritionFactsFragment : Fragment() {
             updateLabelsBasedOnUnit(foodItem)
         }
 
-
+        // Listener for changes in text of the weight field
         binding.editWeight.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { }
-
             override fun afterTextChanged(s: Editable?) {
                 // Calculate nutrition based on the entered quantity and selected unit
                 calculateNutrition(foodItem)
             }
         })
 
+        // Listener for the "Add" button
         binding.addFoodButton.setOnClickListener {
+            // Construct the food item with the correct values based on weight and unit
             if (binding.editWeight.text.toString().toDoubleOrNull() != null) {
                 val quantity = binding.editWeight.text.toString().toDouble()
                 // Convert quantity to grams if necessary
@@ -88,7 +92,7 @@ class NutritionFactsFragment : Fragment() {
                 foodItem.serving_size_g = quantityInGrams
             }
 
-
+            // Add the food item to the correct meal type
             val nutrition = args.nutrition
             when (args.mealType) {
                 "breakfast" -> {
@@ -130,10 +134,12 @@ class NutritionFactsFragment : Fragment() {
 
             // Calculate total calories and update the nutrition object
             val totalCalories = calculateTotalCalories(nutrition)
-            nutrition.calories = totalCalories  // Assuming there's a totalCalories field in Nutrition
+            nutrition.calories = totalCalories
 
+            // Update the Nutrition object with this food item addition
             viewModel.updateNutrition(nutrition)
 
+            // Clean the back stack for ease of navigation
             val action = NutritionFactsFragmentDirections.actionNutritionFactsToNutritionDetail(nutrition)
             findNavController().navigate(action)
             findNavController().popBackStack()
@@ -142,13 +148,15 @@ class NutritionFactsFragment : Fragment() {
         }
     }
 
-    fun calculateTotalCalories(nutrition: Nutrition): Double {
+    // Helper function to calculate the total calories for today
+    private fun calculateTotalCalories(nutrition: Nutrition): Double {
         return (nutrition.breakfast.sumOf { it.calories } +
                 nutrition.lunch.sumOf { it.calories } +
                 nutrition.dinner.sumOf { it.calories } +
                 nutrition.snacks.sumOf { it.calories })
     }
 
+    // Helper function to calculate and update nutritional information to the UI
     private fun calculateNutrition(foodItem: FoodItem) {
         val quantity = binding.editWeight.text.toString().toDoubleOrNull() ?: return
 
@@ -179,6 +187,7 @@ class NutritionFactsFragment : Fragment() {
         return adjustedFoodItem
     }
 
+    // Display the initial information to the UI
     @SuppressLint("SetTextI18n")
     private fun populateUIWithFoodItem(foodItem: FoodItem) {
         binding.textFoodName.text = "Food: ${foodItem.name}"
@@ -189,6 +198,7 @@ class NutritionFactsFragment : Fragment() {
         binding.textCarbohydratesTotalG.text = "Carbohydrates: ${decimalFormat.format(foodItem.carbohydrates_total_g)} g"
     }
 
+    // Display the updated information to the UI
     @SuppressLint("SetTextI18n")
     private fun updateUIWithNutritionInfo(foodItem: FoodItem) {
         val servingLabel = when (selectedUnit) {

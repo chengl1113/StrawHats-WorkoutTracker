@@ -20,10 +20,12 @@ import java.text.DecimalFormat
 private const val TAG = "NutritionDetailFragment"
 
 class NutritionDetailFragment : Fragment() {
+    // User sharedPreferences and goal calories data
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var goalCalories: String
     private val args: NutritionDetailFragmentArgs by navArgs()
 
+    // Formatter for numbers with commas
     private val decimalFormat = DecimalFormat("#,###")
 
     private var _binding: FragmentNutritionDetailBinding? = null
@@ -35,6 +37,7 @@ class NutritionDetailFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Initialize sharedPreferences and get goal calories
         sharedPreferences = requireActivity().getSharedPreferences("LoginInfo", Context.MODE_PRIVATE)
         goalCalories = sharedPreferences.getInt("calorie goal", 0).toString()
     }
@@ -53,63 +56,63 @@ class NutritionDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Display logged and goal calories
         val nutrition = args.nutrition
         binding.nutritionCaloriesTextView.text = "Logged: ${decimalFormat.format(nutrition.calories)} kcal"
         binding.goalCalorieText.text = "Goal: ${decimalFormat.format(goalCalories.toDouble())} kcal"
 
         binding.topCardView.setOnClickListener {
             if (binding.additionalInfoLayout.visibility == View.VISIBLE) {
-                // hide it
+                // Hide it
                 binding.additionalInfoLayout.visibility = View.GONE
                 binding.additionalInfoLayout.startAnimation(AnimationUtils.loadAnimation(context, R.anim.slide_up))
                 binding.expandMoreIcon.setImageResource(R.drawable.expand_more_24px)
 
             } else {
-                // show it
+                // Show it
                 binding.additionalInfoLayout.visibility = View.VISIBLE
                 binding.additionalInfoLayout.startAnimation(AnimationUtils.loadAnimation(context, R.anim.slide_down))
                 binding.expandMoreIcon.setImageResource(R.drawable.expand_less_24px)
+                // Calculate total protein for the day
                 val protein = (nutrition.breakfast.sumOf { it.protein_g } +
                         nutrition.lunch.sumOf { it.protein_g } +
                         nutrition.dinner.sumOf { it.protein_g } +
                         nutrition.snacks.sumOf { it.protein_g })
+                // Calculate total carbohydrates for the day
                 val carbs = (nutrition.breakfast.sumOf { it.carbohydrates_total_g } +
                         nutrition.lunch.sumOf { it.carbohydrates_total_g } +
                         nutrition.dinner.sumOf { it.carbohydrates_total_g } +
                         nutrition.snacks.sumOf { it.carbohydrates_total_g })
+                // Calculate total fat for the day
                 val fat = (nutrition.breakfast.sumOf { it.fat_total_g } +
                         nutrition.lunch.sumOf { it.fat_total_g } +
                         nutrition.dinner.sumOf { it.fat_total_g } +
                         nutrition.snacks.sumOf { it.fat_total_g })
+                // Display the information
                 binding.nutritionTotalFatAdditionalTextView.text = "Fat: ${decimalFormat.format(fat)} g"
                 binding.nutritionProteinAdditionalTextView.text = "Protein: ${decimalFormat.format(protein)} g"
                 binding.nutritionCarbsAdditionalTextView.text = "Carbs: ${decimalFormat.format(carbs)} g"
             }
         }
 
+        // Set up recycler views for the different meal types
         setupRecyclerView(binding.breakfastRecyclerView, nutrition.breakfast)
         setupRecyclerView(binding.lunchRecyclerView, nutrition.lunch)
         setupRecyclerView(binding.dinnerRecyclerView, nutrition.dinner)
         setupRecyclerView(binding.snacksRecyclerView, nutrition.snacks)
 
+        // Navigate to next fragment with meal type as argument
         binding.breakfastAddButton.setOnClickListener {
             navigateToSearchFragment(nutrition, "breakfast")
         }
-
         binding.lunchAddButton.setOnClickListener {
             navigateToSearchFragment(nutrition, "lunch")
         }
-
         binding.dinnerAddButton.setOnClickListener {
             navigateToSearchFragment(nutrition, "dinner")
         }
-
         binding.snacksAddButton.setOnClickListener {
             navigateToSearchFragment(nutrition, "snacks")
-        }
-
-        binding.apply {
-
         }
     }
 

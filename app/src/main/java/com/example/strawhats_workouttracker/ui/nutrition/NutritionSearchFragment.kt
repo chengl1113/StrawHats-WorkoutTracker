@@ -41,14 +41,16 @@ class NutritionSearchFragment : Fragment() {
         val nutrition = args.nutrition
         val mealType = args.mealType
 
+        // Set up listener for when the user hits enter or search
         binding.searchNutrition.setOnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH || (event?.action == KeyEvent.ACTION_DOWN && event.keyCode == KeyEvent.KEYCODE_ENTER)) {
                 val searchText = v.text.toString()
                 if (searchText.isNotEmpty()) {
+                    // Perform the search
                     searchFood(searchText, nutrition, mealType)
                     Log.d(TAG, "Search submitted: $searchText")
                 }
-                // Hide the keyboard
+                // Hide the keyboard after searching
                 val inputMethodManager = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
                 inputMethodManager?.hideSoftInputFromWindow(v.windowToken, 0)
                 true
@@ -58,6 +60,7 @@ class NutritionSearchFragment : Fragment() {
         }
     }
 
+    // Helper function for sending the query and navigating to the next fragment
     private fun searchFood(query: String, nutrition: Nutrition, mealType: String) {
         viewLifecycleOwner.lifecycleScope.launch {
             try {
