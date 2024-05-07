@@ -84,7 +84,7 @@ class WorkoutDetailFragment : Fragment(){
         // updating views and stuff
 
         binding.newExerciseButton.setOnClickListener{
-            addNewExercise()
+           addNewExercise()
         }
 
         binding.newSetButton.setOnClickListener{
@@ -112,8 +112,47 @@ class WorkoutDetailFragment : Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // start timer when the view is created
+        running = true
+        handler.post(runnable)
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putSerializable("workout", workout)
+        Log.d(TAG, "onSaveInstanceState: $workout")
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+
+        workout = savedInstanceState?.getSerializable("workout") as? Workout ?: Workout(LocalDate.now(), 0, exercises = mutableListOf())
+        Log.d(TAG, "onViewStateRestored: $workout")
+        restoreViews()
+    }
+
+    private fun restoreViews() {
+
+        for (exercise in workout.exercises) {
+            val newExercise = layoutInflater.inflate(R.layout.list_item_exercise, null)
+            val exerciseTitleView = newExercise.findViewById<TextView>(R.id.exercise_title)
+            exerciseTitleView.text = exercise.name
+            exercises[exercise.name] = newExercise
+            binding.exerciseContainer.addView(newExercise)
+
+            for (set in exercise.sets) {
+
+                val newSet = layoutInflater.inflate(R.layout.list_item_set, null)
+                val text = "${set.weight} X ${set.reps} @ RPE ${set.rpe}"
+                val setInfoTextView = newSet.findViewById<TextView>(R.id.set_detail)
+                setInfoTextView.text = text
+                setInfoTextView.setTextColor(resources.getColor(R.color.off_white))
+                exercises[exercise.name]?.findViewById<LinearLayout>(R.id.setInfoContainer)
+                    ?.addView(setInfoTextView)
+            }
+        }
+    }
     private fun addNewSet() {
         // update set counter
         updateSetCounter()
@@ -206,9 +245,5 @@ class WorkoutDetailFragment : Fragment(){
         val newWorkout = databaseReference.push()
         newWorkout.setValue(workout)
         workoutViewModel.addWorkout(workout)
-    }
-    override fun onDestroyView() {
-        super.onDestroyView()
-//        _binding = null
     }
 }
