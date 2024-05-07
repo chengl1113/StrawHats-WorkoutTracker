@@ -61,4 +61,11 @@
     <string name="search">Search…</string>
     <string name="log_in">LOG IN</string>
     <string name="sign_up_text">SIGN UP</string>
+    <string name="food_name">Food Name</string>
+    <string name="food_calories">Food Calories</string>
+    <string name="food_serving">Food Serving Size(grams)</string>
+    <string name="food_fat">Food Total Fat(grams)</string>
+    <string name="food_protein">Food Protein(grams)</string>
+    <string name="food_carbs">Food Carbohydrates(grams)</string>
+    <string name="unit">Unit</string>
 </resources>

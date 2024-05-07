@@ -100,6 +100,7 @@
                         android:id="@+id/breakfast_add_button"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
+                        android:backgroundTint="@color/dark_gray"
                         android:text="@string/plus_sign" />
                 </LinearLayout>
 
@@ -154,6 +155,7 @@
                         android:id="@+id/lunch_add_button"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
+                        android:backgroundTint="@color/dark_gray"
                         android:text="@string/plus_sign" />
                 </LinearLayout>
 
@@ -208,6 +210,7 @@
                         android:id="@+id/dinner_add_button"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
+                        android:backgroundTint="@color/dark_gray"
                         android:text="@string/plus_sign" />
                 </LinearLayout>
 
@@ -262,6 +265,7 @@
                         android:id="@+id/snacks_add_button"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
+                        android:backgroundTint="@color/dark_gray"
                         android:text="@string/plus_sign" />
                 </LinearLayout>
 

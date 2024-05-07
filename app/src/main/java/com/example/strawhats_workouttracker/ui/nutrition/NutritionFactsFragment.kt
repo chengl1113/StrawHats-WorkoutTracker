@@ -10,12 +10,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import android.widget.Spinner
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.strawhats_workouttracker.R
 import com.example.strawhats_workouttracker.databinding.FragmentNutritionFactsBinding
 import java.text.DecimalFormat
 
@@ -51,22 +53,15 @@ class NutritionFactsFragment : Fragment() {
         populateUIWithFoodItem(foodItem)
 
         val options = arrayOf("grams", "ounces", "pounds")
-        val spinner: Spinner = binding.spinner
+        val adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, options)
+        val autoCompleteTextView = binding.autoCompleteTextView
+        autoCompleteTextView.setAdapter(adapter)
 
-        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, options)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinner.adapter = adapter
-
-        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                selectedUnit = options[position]
-                // Update labels based on the selected unit
-                updateLabelsBasedOnUnit(foodItem)
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>) {
-                // Do nothing
-            }
+        autoCompleteTextView.setOnItemClickListener { parent, view, position, id ->
+            // Get the selected item using position
+            selectedUnit = parent.adapter.getItem(position) as String
+            // Update labels based on the selected unit
+            updateLabelsBasedOnUnit(foodItem)
         }
 
 
@@ -177,7 +172,7 @@ class NutritionFactsFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     private fun populateUIWithFoodItem(foodItem: FoodItem) {
         binding.textFoodName.text = "Food: ${foodItem.name}"
-        binding.textFoodCalories.text = "Calories: ${foodItem.calories} kcal"
+        binding.textFoodCalories.text = "${foodItem.calories} kcal"
         binding.textFoodServingSizeG.text = "Serving size: ${decimalFormat.format(foodItem.serving_size_g)} g"
         binding.textFoodFatTotalG.text = "Total Fat: ${foodItem.fat_total_g} g"
         binding.textFoodProteinG.text = "Protein: ${foodItem.protein_g} g"
@@ -193,7 +188,7 @@ class NutritionFactsFragment : Fragment() {
             else -> "g"
         }
 
-        binding.textFoodCalories.text = "Calories: ${decimalFormat.format(foodItem.calories)} kcal"
+        binding.textFoodCalories.text = "${decimalFormat.format(foodItem.calories)} kcal"
         binding.textFoodServingSizeG.text = "Serving size: ${decimalFormat.format(foodItem.serving_size_g)} $servingLabel"
         binding.textFoodFatTotalG.text = "Total Fat: ${decimalFormat.format(foodItem.fat_total_g)} g"
         binding.textFoodProteinG.text = "Protein: ${decimalFormat.format(foodItem.protein_g)} g"
