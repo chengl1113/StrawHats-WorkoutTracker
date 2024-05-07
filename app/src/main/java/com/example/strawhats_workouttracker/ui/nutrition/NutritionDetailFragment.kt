@@ -1,5 +1,6 @@
 package com.example.strawhats_workouttracker.ui.nutrition
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -46,12 +47,13 @@ class NutritionDetailFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val nutrition = args.nutrition
         binding.nutritionCaloriesTextView.text = "Logged: ${decimalFormat.format(nutrition.calories)} kcal"
-        binding.goalCalorieText.text = String.format("Goal: $goalCalories calories")
+        binding.goalCalorieText.text = "Goal: ${decimalFormat.format(goalCalories.toDouble())} kcal"
 
         setupRecyclerView(binding.breakfastRecyclerView, nutrition.breakfast)
         setupRecyclerView(binding.lunchRecyclerView, nutrition.lunch)
